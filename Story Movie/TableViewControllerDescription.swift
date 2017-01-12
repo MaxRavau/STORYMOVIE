@@ -43,7 +43,7 @@ class TableViewControllerDescription: UITableViewController {
     
         
             self.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
-            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled-100"), for: UIControlState.normal)
+            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
             print("le film est maintenant dans myPaylist")
             
     }
@@ -110,6 +110,7 @@ class TableViewControllerDescription: UITableViewController {
 // on intègre une condition si la variable == true alors
         if MovieInPlaylist == true{
             
+            RemoveMoviePlaylist(identifiant: (currentMovie?._identifiant)!)
             self.favoriteButton?.isHidden = false
             self.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
             print("le film n'est pas dans la liste")
@@ -118,7 +119,7 @@ class TableViewControllerDescription: UITableViewController {
             myPlaylist.append(currentMovie!)
             
             self.favoriteButton?.isHidden = true
-            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled-100"), for: UIControlState.normal)
+            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
             print("le film est maintenant dans myPaylist")
            return
         }
