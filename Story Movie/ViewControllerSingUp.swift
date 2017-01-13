@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var adressEmail: UITextField!
@@ -37,6 +38,7 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
     
     @IBAction func BackLogin(_ sender: UIButton) {
     
+        
     self.navigationController?.popViewController(animated: true)
     
     }
@@ -52,6 +54,7 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         return  true
     }
 
@@ -70,6 +73,8 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
             
             setCustomDictionary(dict: dataBase)
             print(Array(UserDefaults.standard.dictionaryRepresentation()))
+            
+            
             self.performSegue(withIdentifier: "Segue.Discover", sender: nil)
             // Le print c'est pour afficher tout le dictionnaire
         }

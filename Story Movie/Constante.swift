@@ -10,10 +10,10 @@ import UIKit
 
 
 
+
 var dataBase:[String:String] = ["Max.ravau@gmail.com" : "Maxmax"]
 
 var myPlaylist: [Movie] = []
-
 
 
 // On a crée la fonction removeMoviePlaylist avec un paramètre INT

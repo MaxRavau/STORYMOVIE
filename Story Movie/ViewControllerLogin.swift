@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewControllerLogin: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var userEmail: UITextField!
@@ -63,6 +64,7 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         
         if (dataBase[userEmail.text!] == "\(userPassword.text!)"){
             print("La connection est OK")
+            
             
             //   displayMyAlertMessage(userMessage: "Connexion OK !")
             // Tu n auras plus besoin d afficher une alerte
