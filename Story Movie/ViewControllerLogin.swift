@@ -10,7 +10,11 @@ import UIKit
 
 
 class ViewControllerLogin: UIViewController, UITextFieldDelegate {
+    
+    @IBOutlet var buttonConnexion: UIButton!
 
+    @IBOutlet var buttonInscription: UIButton!
+    
     @IBOutlet var userEmail: UITextField!
     
     @IBOutlet var userPassword: UITextField!
@@ -37,7 +41,12 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewControllerLogin.dismissKeyboard)))
         
-       print("Ceci est un test")
+        buttonConnexion.layer.cornerRadius = 15
+        buttonInscription.layer.cornerRadius = 15
+        buttonConnexion.layer.borderColor = UIColor.white.cgColor
+        buttonConnexion.layer.borderWidth = 1.5
+        buttonInscription.layer.borderColor = UIColor.white.cgColor
+        buttonInscription.layer.borderWidth = 1.5
     }
     
     override func didReceiveMemoryWarning(){

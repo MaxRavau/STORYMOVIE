@@ -17,6 +17,7 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var repeatPassword: UITextField!
     
+    @IBOutlet var buttonConfirmer: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,12 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewControllerSingUp.dismissKeyboard)))
         // Do any additional setup after loading the view.
+        
+        buttonConfirmer.layer.cornerRadius = 20
+        buttonConfirmer.layer.borderColor = UIColor.white.cgColor
+        buttonConfirmer.layer.borderWidth = 1.5
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

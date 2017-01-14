@@ -56,12 +56,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bos-f9-a1F">
+                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bos-f9-a1F">
                                 <rect key="frame" x="36" y="443" width="128" height="36"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="backgroundColor" red="0.2470588235" green="0.63921568630000003" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bos-f9-a1F" secondAttribute="height" multiplier="131:37" id="Jhj-WS-RJH"/>
                                 </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="10" bottom="8" right="8"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="17"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="CONNEXION"/>
@@ -96,7 +97,7 @@
                             </imageView>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUX-VK-Gfq">
                                 <rect key="frame" x="207" y="443" width="132" height="36"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="backgroundColor" red="0.69574873096446699" green="0.13438701780261728" blue="0.1800376426328561" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fUX-VK-Gfq" secondAttribute="height" multiplier="11:3" id="xvd-UL-5QB"/>
                                 </constraints>
@@ -153,6 +154,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="SlY-72-vSz"/>
                     <connections>
+                        <outlet property="buttonConnexion" destination="bos-f9-a1F" id="8cX-B5-Yah"/>
+                        <outlet property="buttonInscription" destination="fUX-VK-Gfq" id="JNq-gX-X7X"/>
                         <outlet property="userEmail" destination="taR-8A-L2z" id="0MS-vZ-vRq"/>
                         <outlet property="userPassword" destination="r3Q-XJ-Ftk" id="3wM-oi-D4J"/>
                         <segue destination="Pp7-tf-MlB" kind="presentation" identifier="discover" id="yXZ-2j-s2X"/>
@@ -240,7 +243,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEx-qm-XZh">
                                 <rect key="frame" x="131" y="450" width="113" height="51"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="backgroundColor" red="0.2470588235" green="0.63921568630000003" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="113" id="4Am-b3-hv9"/>
                                     <constraint firstAttribute="height" constant="51" id="gq0-BE-mpS"/>
@@ -301,6 +304,7 @@
                     </view>
                     <connections>
                         <outlet property="adressEmail" destination="Vzk-7J-TcB" id="vEh-y7-a4A"/>
+                        <outlet property="buttonConfirmer" destination="CEx-qm-XZh" id="9xT-47-anu"/>
                         <outlet property="password" destination="9AL-H2-m9g" id="J8S-4S-ywi"/>
                         <outlet property="repeatPassword" destination="KbQ-DX-YM5" id="nuY-Ln-qkW"/>
                         <segue destination="Pp7-tf-MlB" kind="presentation" identifier="Segue.Discover" id="ddj-aF-ZYI"/>
