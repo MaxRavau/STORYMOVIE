@@ -7,16 +7,27 @@
 //
 
 import UIKit
+import Bolts
+import Parse
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "WadtRqs3ghU1BUGnwx6GNHGRQYBKmy3BYe8i8zyB"
+            $0.clientKey = "RC7Hm7s95VSjIx28lFCKZsRvd6mwwEHM5oFNExGL"
+            $0.server = "https://parseapi.back4app.com"
+        }
+        Parse.initialize(with: configuration)
 
         return true
     }

@@ -32,24 +32,9 @@ class TableViewControllerDescription: UITableViewController {
         
         super.viewWillAppear(animated)
         
-        let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
         
-        if MovieInPlaylist == true{
-            self.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
-            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
-            print("le film n'est pas dans la liste")
-        
-        }else{
-    
-        
-            self.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
-            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
-            print("le film est maintenant dans myPaylist")
-            
     }
-
-
-}
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,6 +65,23 @@ class TableViewControllerDescription: UITableViewController {
             cell.labelMinute.text = currentMovie?._duree
             cell.labelSousTitre.text = currentMovie?._sousTitre
             self.favoriteButton = cell.favoriteButton
+        
+        let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
+        if MovieInPlaylist == false{
+            cell.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
+            cell.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
+            print("le film n'est pas dans la liste")
+            
+        }else{
+            
+            
+            self.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
+            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
+            print("le film est maintenant dans myPaylist")
+            
+        }
+
+        
 //On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
             return cell
             

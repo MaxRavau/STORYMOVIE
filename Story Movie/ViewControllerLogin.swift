@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 
 class ViewControllerLogin: UIViewController, UITextFieldDelegate {
@@ -21,8 +22,20 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
     
     @IBAction func connexionButtonTap(_ sender: Any) {
     
-    displayGoodConnection()
-    
+    //displayGoodConnection()
+    PFUser.logInWithUsername(inBackground: userEmail.text!, password: userPassword.text!) { (user, error) in
+        if error == nil{
+            
+            print(" On a pas d'erreur la connexion a bien fontionné")
+            self.performSegue(withIdentifier: "discover" ,sender: self )
+            
+        }else{
+            self.displayMyAlertMessage(userMessage: "Les identifiants sont incorrects, Recommencez!")
+            print("Il y a une erreur \(error.debugDescription)")
+        }
+        
+        }
+        
     }
     
     
@@ -47,7 +60,18 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         buttonConnexion.layer.borderWidth = 1.5
         buttonInscription.layer.borderColor = UIColor.white.cgColor
         buttonInscription.layer.borderWidth = 1.5
+        
+        let testObject = PFObject(className: "TestObject")
+        testObject["foo"] = "bar"
+        testObject.saveInBackground { (success, error) in
+           print("Object has been saved.")
+        }
+        
+        
+        
     }
+        
+    
     
     override func didReceiveMemoryWarning(){
         super.didReceiveMemoryWarning()
