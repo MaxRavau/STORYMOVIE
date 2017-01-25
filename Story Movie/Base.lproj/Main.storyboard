@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IuH-gp-tOW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IuH-gp-tOW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -185,7 +185,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KbQ-DX-YM5">
                                 <rect key="frame" x="137" y="296" width="196" height="30"/>
@@ -194,7 +194,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEx-qm-XZh">
                                 <rect key="frame" x="131" y="450" width="113" height="51"/>
@@ -262,7 +262,7 @@
                         <outlet property="buttonConfirmer" destination="CEx-qm-XZh" id="9xT-47-anu"/>
                         <outlet property="password" destination="9AL-H2-m9g" id="J8S-4S-ywi"/>
                         <outlet property="repeatPassword" destination="KbQ-DX-YM5" id="nuY-Ln-qkW"/>
-                        <segue destination="Pp7-tf-MlB" kind="presentation" identifier="Segue.Discover" id="ddj-aF-ZYI"/>
+                        <segue destination="Pp7-tf-MlB" kind="presentation" identifier="segue.discover" id="ddj-aF-ZYI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FkL-La-tSy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -438,7 +438,7 @@
             <objects>
                 <tableViewController title="ABOUT" id="0BY-8c-zOi" customClass="TableViewControllerAbout" customModule="Story_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="lCY-bP-lnB">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -475,7 +475,7 @@
                             <tableViewSection headerTitle="FOLLOW STORY MOVIE" id="CuM-iR-hcp">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="hoM-OU-V6Q">
-                                        <rect key="frame" x="0.0" y="157" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="156" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hoM-OU-V6Q" id="aMm-Mv-yxo">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
@@ -498,7 +498,7 @@
                                         <color key="backgroundColor" red="0.14759124302741133" green="0.14759124302741133" blue="0.14759124302741133" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="7Ri-Q6-JbL">
-                                        <rect key="frame" x="0.0" y="201" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="200" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Ri-Q6-JbL" id="VLh-Vi-lnd">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
@@ -524,7 +524,7 @@
                             <tableViewSection headerTitle="ABOUT ASTRIO" id="8yG-9F-TsA">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="61" id="dUW-wi-aRi">
-                                        <rect key="frame" x="0.0" y="302" width="375" height="61"/>
+                                        <rect key="frame" x="0.0" y="300" width="375" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dUW-wi-aRi" id="Sm7-0l-I5L">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -543,7 +543,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="rYR-07-yH6">
-                                        <rect key="frame" x="0.0" y="363" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="361" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rYR-07-yH6" id="iTr-24-jaF">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
@@ -570,7 +570,7 @@
                             <tableViewSection headerTitle="ABOUT TMDB" id="9Ue-WQ-weP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="62" id="mWq-Jv-8aq">
-                                        <rect key="frame" x="0.0" y="464" width="375" height="62"/>
+                                        <rect key="frame" x="0.0" y="461" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mWq-Jv-8aq" id="xLa-P6-OZc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
@@ -596,17 +596,19 @@
                             <outlet property="delegate" destination="0BY-8c-zOi" id="adq-X8-kvx"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black" translucent="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1OF-sJ-fhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4944.8000000000002" y="1835.5322338830586"/>
+            <point key="canvasLocation" x="4944.5" y="1835.5"/>
         </scene>
         <!--PRIVACY POLICY-->
         <scene sceneID="rsx-51-aEH">
             <objects>
                 <tableViewController title="PRIVACY POLICY" id="SuI-bM-094" customClass="TableViewControllerPolicy" customModule="Story_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="137" sectionHeaderHeight="28" sectionFooterHeight="28" id="sR6-VV-5gV">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -1102,6 +1104,6 @@
         <image name="Settings-100" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yXZ-2j-s2X"/>
+        <segue reference="ddj-aF-ZYI"/>
     </inferredMetricsTieBreakers>
 </document>
