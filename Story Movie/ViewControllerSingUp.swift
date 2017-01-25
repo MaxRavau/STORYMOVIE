@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Parse
 
 class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
 
@@ -68,30 +68,30 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
     
     @IBAction func connexionButtonTap(_ sender: Any) {
     
-        let emailSuccess: Bool = checkEmailSuccess()
-        let passwordSuccess: Bool = checkPasswordSuccess()
+        //let emailSuccess: Bool = checkEmailSuccess()
+        //let passwordSuccess: Bool = checkPasswordSuccess()
         
-        if emailSuccess == true && passwordSuccess == true{
+        //if emailSuccess == true && passwordSuccess == true{
             
             
-            dataBase[adressEmail.text!] = password.text
-            print("\(dataBase)")
+            //dataBase[adressEmail.text!] = password.text
+            //print("\(dataBase)")
             // On utlise UserDefaults pour sauvegarder le dictionnaire dans le téléphone.
             
-            setCustomDictionary(dict: dataBase)
-            print(Array(UserDefaults.standard.dictionaryRepresentation()))
-            
-            
-            self.performSegue(withIdentifier: "Segue.Discover", sender: nil)
-            // Le print c'est pour afficher tout le dictionnaire
+            //setCustomDictionary(dict: dataBase)
+            //print(Array(UserDefaults.standard.dictionaryRepresentation()))
+        
+        
+        
+            ErrorRegister()
+    
+        
+        
+            Register()
+     
+        
         }
 
-    
-    
-    }
-    
-    
-    
     // On a crée une fonction de paramètre dictionnaire [String:String] pour ziper la savegarde du dictionnaire
     func setCustomDictionary(dict: [String: String]) {
         
@@ -191,5 +191,52 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
         return false
     }
     
+    
+    func Register(){
+        
+        
+        let username = adressEmail.text
+        let password = self.password.text
+        
+        // Defining the user object
+        let user = PFUser()
+        user.username = username
+        user.password = password
+        
+        
+        
+//j'enregistre
+        user.signUpInBackground {
+            (success, error) -> Void in
+            
+// si il y a une erreur
+            if let error = error as NSError? {
+                let errorString = error.userInfo["error"] as? NSString
+                //self.alert(message: errorString!, title: "Error")
+// On met un un message d'alerte
+                
+            } else {
+// Sinon on dit on met un mesage d'alerte positif
+                //self.alert(message: "Registered successfully", title: "Registering")
+            }
+        }
+    }
 
+        
+
+    
+    func ErrorRegister(){
+        
+        //Si adressEmail est vide alors un message d'erreur
+        if self.adressEmail.text?.isEmpty == true{
+            self.displayMyAlertMessage2(userMessage: "Veuillez entrez votre Email !")
+            //Sinon si password est vide alors un message d'erreur
+        }else if self.password.text?.isEmpty == true{
+            self.displayMyAlertMessage2(userMessage: "Veuillez entrer votre mot de Passe !")
+            //Sinon si password est différent de repeatPassword alors on met un message d'erreur
+        }else if self.password.text != self.repeatPassword.text{
+            self.displayMyAlertMessage2(userMessage: "Les deux mots de passe ne sont pas identiques !")
+            
+        }
+    }
 }
