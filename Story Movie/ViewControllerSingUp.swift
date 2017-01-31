@@ -113,19 +113,6 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
     }
     
     
-    func displayMyAlertMessage2(userMessage: String){
-        
-        let myAlert2 = UIAlertController(title: "BIENVENUE", message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
-        
-        let okAction2 = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-        
-        self.performSegue(withIdentifier: "segue.discover", sender: self)
-        myAlert2.addAction(okAction2)
-        
-        self.present(myAlert2, animated: true, completion: nil)
-        
-        
-    }
     
     func displayMyAlertMessage(userMessage: String){
         
