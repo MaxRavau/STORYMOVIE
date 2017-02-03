@@ -20,6 +20,7 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var userPassword: UITextField!
     
+    @IBOutlet var whiteImage: UIImageView!
     
     
     @IBAction func connexionButtonTap(_ sender: Any) {
@@ -58,10 +59,14 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         
         buttonConnexion.layer.cornerRadius = 15
         buttonInscription.layer.cornerRadius = 15
-        buttonConnexion.layer.borderColor = UIColor.white.cgColor
+        buttonConnexion.layer.borderColor = UIColor.black.cgColor
         buttonConnexion.layer.borderWidth = 1.5
-        buttonInscription.layer.borderColor = UIColor.white.cgColor
+        buttonInscription.layer.borderColor = UIColor.black.cgColor
         buttonInscription.layer.borderWidth = 1.5
+        
+        
+        whiteImage.layer.borderWidth = 1.5
+        whiteImage.layer.borderColor = UIColor.black.cgColor
         
         let testObject = PFObject(className: "TestObject")
         testObject["foo"] = "bar"

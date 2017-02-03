@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,30 +31,42 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STORY MOVIE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xG-o9-4oB">
-                                <rect key="frame" x="79" y="184" width="217" height="298"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="70"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Colourwall-1" translatesAutoresizingMaskIntoConstraints="NO" id="Mys-lR-qHe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BY MR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryS-WV-NLM">
+                                <rect key="frame" x="309" y="638" width="58" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="58" id="BKb-Vg-ZpY"/>
+                                    <constraint firstAttribute="height" constant="21" id="rGU-p4-Bma"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Camera" translatesAutoresizingMaskIntoConstraints="NO" id="pmJ-yc-psH">
-                                <rect key="frame" x="265" y="192" width="70" height="66"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STORY MOVIE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNU-48-oIx">
+                                <rect key="frame" x="79" y="60" width="217" height="298"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="pmJ-yc-psH" secondAttribute="height" multiplier="35:33" id="7di-iZ-cHn"/>
+                                    <constraint firstAttribute="width" constant="217" id="Sg9-cl-ZMR"/>
+                                    <constraint firstAttribute="height" constant="298" id="hNK-Gg-gM6"/>
                                 </constraints>
-                            </imageView>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="70"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="pmJ-yc-psH" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="172" id="0T4-On-WB2"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="ryS-WV-NLM" secondAttribute="bottom" constant="8" id="0MD-66-kBe"/>
+                            <constraint firstAttribute="trailing" secondItem="ryS-WV-NLM" secondAttribute="trailing" constant="8" id="2VR-hy-3mD"/>
                             <constraint firstAttribute="trailing" secondItem="Lhf-cv-ETX" secondAttribute="trailing" constant="8" id="5de-SZ-snz"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="3xG-o9-4oB" secondAttribute="bottom" constant="185" id="Ifv-tO-GBC"/>
-                            <constraint firstItem="pmJ-yc-psH" firstAttribute="leading" secondItem="3xG-o9-4oB" secondAttribute="trailing" constant="-31" id="IsZ-dQ-Jk9"/>
-                            <constraint firstAttribute="trailing" secondItem="pmJ-yc-psH" secondAttribute="trailing" constant="40" id="Q6W-UA-I8j"/>
+                            <constraint firstItem="Mys-lR-qHe" firstAttribute="top" secondItem="mNU-48-oIx" secondAttribute="bottom" constant="-358" id="JEO-ym-gwU"/>
+                            <constraint firstItem="Mys-lR-qHe" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Lhw-gK-kYI"/>
+                            <constraint firstItem="Mys-lR-qHe" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="PmI-Tc-YaS"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Lhf-cv-ETX" secondAttribute="bottom" constant="20" id="Z87-01-w8A"/>
-                            <constraint firstItem="3xG-o9-4oB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="iZJ-3G-h44"/>
-                            <constraint firstItem="3xG-o9-4oB" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="164" id="rgJ-iD-Mbc"/>
-                            <constraint firstItem="3xG-o9-4oB" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="63" id="uee-W3-Gye"/>
+                            <constraint firstItem="mNU-48-oIx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="iA3-bm-7Q3"/>
+                            <constraint firstAttribute="trailing" secondItem="Mys-lR-qHe" secondAttribute="trailing" id="lnI-H0-OjO"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Mys-lR-qHe" secondAttribute="bottom" id="wDT-01-IvF"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -65,6 +76,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Camera" width="100" height="100"/>
+        <image name="Colourwall-1" width="640" height="1136"/>
     </resources>
 </document>

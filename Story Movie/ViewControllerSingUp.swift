@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
+class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var adressEmail: UITextField!
     
@@ -18,6 +18,10 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
     @IBOutlet var repeatPassword: UITextField!
     
     @IBOutlet var buttonConfirmer: UIButton!
+    
+    @IBOutlet var profilPhotoImage: UIImageView!
+    
+    @IBOutlet var whiteImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +36,18 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         
         buttonConfirmer.layer.cornerRadius = 20
-        buttonConfirmer.layer.borderColor = UIColor.white.cgColor
+        buttonConfirmer.layer.borderColor = UIColor.black.cgColor
         buttonConfirmer.layer.borderWidth = 1.5
         
+        //Ce code permet de faire une image arrondi
+        profilPhotoImage.layer.cornerRadius = profilPhotoImage.frame.size.width / 2
+        profilPhotoImage.clipsToBounds = true
+        profilPhotoImage.layer.borderColor = UIColor.black.cgColor
+        profilPhotoImage.layer.borderWidth = 1.5
         
+        
+        whiteImage.layer.borderWidth = 1.5
+        whiteImage.layer.borderColor = UIColor.black.cgColor
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,7 +77,30 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
         return  true
     }
 
+    @IBAction func takePictureButton(_ sender: Any) {
     
+        let pickerController = UIImagePickerController()
+        
+        pickerController.delegate = self
+        pickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        
+        self.present(pickerController, animated: true, completion: nil)
+        
+
+    
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+        
+    {
+        
+        profilPhotoImage.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+
     @IBAction func connexionButtonTap(_ sender: Any) {
     
         //Étape 1 -> L’utilisateur entre son email
@@ -139,6 +174,15 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate {
         let user = PFUser()
         user.username = username
         user.password = password
+        
+        let profileImageData = UIImageJPEGRepresentation(profilPhotoImage.image!, 1)
+        
+        if(profileImageData != nil){
+            
+            let profileImageFile = PFFile(data: profileImageData!)
+            user.setObject(profileImageFile!, forKey: "profile_Picture")
+            
+        }
         
 //j'enregistre
         user.signUpInBackground {

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		504485B31E1BFBB60030C6B6 /* TableViewCellDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504485B21E1BFBB60030C6B6 /* TableViewCellDF.swift */; };
 		504485B51E1BFBED0030C6B6 /* TableViewControllerDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504485B41E1BFBED0030C6B6 /* TableViewControllerDF.swift */; };
-		504485B91E1D727E0030C6B6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504485B81E1D727E0030C6B6 /* SearchViewController.swift */; };
 		505D35161E36124F00E7D95F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35151E36124F00E7D95F /* AudioToolbox.framework */; };
 		505D35181E36125C00E7D95F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35171E36125C00E7D95F /* CFNetwork.framework */; };
 		505D351A1E36127400E7D95F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35191E36127400E7D95F /* CoreGraphics.framework */; };
@@ -21,8 +20,10 @@
 		505D35261E3612B200E7D95F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35251E3612B200E7D95F /* libsqlite3.tbd */; };
 		505D35291E36175700E7D95F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35271E36175700E7D95F /* Bolts.framework */; };
 		505D352A1E36175700E7D95F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35281E36175700E7D95F /* Parse.framework */; };
+		50C012E51E436161005612D1 /* ViewControllerResertMotDePasse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C012E41E436161005612D1 /* ViewControllerResertMotDePasse.swift */; };
 		50C01E431E1A86E000E63124 /* TableViewCellPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C01E421E1A86E000E63124 /* TableViewCellPolicy.swift */; };
 		50C01E451E1A86F500E63124 /* TableViewControllerPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C01E441E1A86F500E63124 /* TableViewControllerPolicy.swift */; };
+		50EF34951E434467001F81F4 /* ViewControllerProfil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EF34941E434467001F81F4 /* ViewControllerProfil.swift */; };
 		50EFDB591E141BD800A1445A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFDB581E141BD800A1445A /* AppDelegate.swift */; };
 		50EFDB5B1E141BD800A1445A /* ViewControllerLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFDB5A1E141BD800A1445A /* ViewControllerLogin.swift */; };
 		50EFDB5E1E141BD800A1445A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50EFDB5C1E141BD800A1445A /* Main.storyboard */; };
@@ -65,7 +66,6 @@
 /* Begin PBXFileReference section */
 		504485B21E1BFBB60030C6B6 /* TableViewCellDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellDF.swift; sourceTree = "<group>"; };
 		504485B41E1BFBED0030C6B6 /* TableViewControllerDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerDF.swift; sourceTree = "<group>"; };
-		504485B81E1D727E0030C6B6 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		505D35151E36124F00E7D95F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		505D35171E36125C00E7D95F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		505D35191E36127400E7D95F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -77,8 +77,10 @@
 		505D35251E3612B200E7D95F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		505D35271E36175700E7D95F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		505D35281E36175700E7D95F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		50C012E41E436161005612D1 /* ViewControllerResertMotDePasse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerResertMotDePasse.swift; sourceTree = "<group>"; };
 		50C01E421E1A86E000E63124 /* TableViewCellPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellPolicy.swift; sourceTree = "<group>"; };
 		50C01E441E1A86F500E63124 /* TableViewControllerPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerPolicy.swift; sourceTree = "<group>"; };
+		50EF34941E434467001F81F4 /* ViewControllerProfil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProfil.swift; sourceTree = "<group>"; };
 		50EFDB551E141BD800A1445A /* Story Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Story Movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EFDB581E141BD800A1445A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50EFDB5A1E141BD800A1445A /* ViewControllerLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerLogin.swift; sourceTree = "<group>"; };
@@ -212,7 +214,8 @@
 				50C01E441E1A86F500E63124 /* TableViewControllerPolicy.swift */,
 				504485B21E1BFBB60030C6B6 /* TableViewCellDF.swift */,
 				504485B41E1BFBED0030C6B6 /* TableViewControllerDF.swift */,
-				504485B81E1D727E0030C6B6 /* SearchViewController.swift */,
+				50EF34941E434467001F81F4 /* ViewControllerProfil.swift */,
+				50C012E41E436161005612D1 /* ViewControllerResertMotDePasse.swift */,
 				50EFDB5C1E141BD800A1445A /* Main.storyboard */,
 				50EFDB5F1E141BD800A1445A /* Assets.xcassets */,
 				50EFDB611E141BD800A1445A /* LaunchScreen.storyboard */,
@@ -382,6 +385,7 @@
 				50F011AF1E145FCC00951E37 /* TableViewControllerDescription.swift in Sources */,
 				50F011B31E146AB500951E37 /* ViewControllerFavorite.swift in Sources */,
 				50F0119F1E142C6500951E37 /* Constante.swift in Sources */,
+				50EF34951E434467001F81F4 /* ViewControllerProfil.swift in Sources */,
 				50F011AD1E145D1E00951E37 /* TableViewCellDescription.swift in Sources */,
 				50C01E431E1A86E000E63124 /* TableViewCellPolicy.swift in Sources */,
 				50EFDB5B1E141BD800A1445A /* ViewControllerLogin.swift in Sources */,
@@ -390,12 +394,12 @@
 				50F011AB1E14370B00951E37 /* ViewControllerMovie.swift in Sources */,
 				50EFDB591E141BD800A1445A /* AppDelegate.swift in Sources */,
 				50F011A11E142CFF00951E37 /* Movie.swift in Sources */,
-				504485B91E1D727E0030C6B6 /* SearchViewController.swift in Sources */,
 				50F011B51E1A557200951E37 /* TableViewControllerAbout.swift in Sources */,
 				504485B51E1BFBED0030C6B6 /* TableViewControllerDF.swift in Sources */,
 				504485B31E1BFBB60030C6B6 /* TableViewCellDF.swift in Sources */,
 				50F011A71E1433C700951E37 /* TableViewControllerDiscover.swift in Sources */,
 				50F011A51E14316400951E37 /* TableViewCellDiscover.swift in Sources */,
+				50C012E51E436161005612D1 /* ViewControllerResertMotDePasse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,7 +548,7 @@
 		50EFDB7E1E141BD800A1445A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon9;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon13;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TV7MS89DG8;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -562,7 +566,7 @@
 		50EFDB7F1E141BD800A1445A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon9;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon13;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TV7MS89DG8;
 				FRAMEWORK_SEARCH_PATHS = (
