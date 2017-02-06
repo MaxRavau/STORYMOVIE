@@ -20,6 +20,7 @@
 		505D35261E3612B200E7D95F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35251E3612B200E7D95F /* libsqlite3.tbd */; };
 		505D35291E36175700E7D95F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35271E36175700E7D95F /* Bolts.framework */; };
 		505D352A1E36175700E7D95F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505D35281E36175700E7D95F /* Parse.framework */; };
+		508C8CC71E487ED1003E17CA /* ViewControllerChangeEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C8CC61E487ED1003E17CA /* ViewControllerChangeEmail.swift */; };
 		50C012E51E436161005612D1 /* ViewControllerResertMotDePasse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C012E41E436161005612D1 /* ViewControllerResertMotDePasse.swift */; };
 		50C01E431E1A86E000E63124 /* TableViewCellPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C01E421E1A86E000E63124 /* TableViewCellPolicy.swift */; };
 		50C01E451E1A86F500E63124 /* TableViewControllerPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C01E441E1A86F500E63124 /* TableViewControllerPolicy.swift */; };
@@ -77,6 +78,7 @@
 		505D35251E3612B200E7D95F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		505D35271E36175700E7D95F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		505D35281E36175700E7D95F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		508C8CC61E487ED1003E17CA /* ViewControllerChangeEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerChangeEmail.swift; sourceTree = "<group>"; };
 		50C012E41E436161005612D1 /* ViewControllerResertMotDePasse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerResertMotDePasse.swift; sourceTree = "<group>"; };
 		50C01E421E1A86E000E63124 /* TableViewCellPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellPolicy.swift; sourceTree = "<group>"; };
 		50C01E441E1A86F500E63124 /* TableViewControllerPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerPolicy.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				50F0119E1E142C6500951E37 /* Constante.swift */,
 				50EFDB5A1E141BD800A1445A /* ViewControllerLogin.swift */,
 				50F0119C1E14266800951E37 /* ViewControllerSingUp.swift */,
+				50C012E41E436161005612D1 /* ViewControllerResertMotDePasse.swift */,
 				50F011A41E14316400951E37 /* TableViewCellDiscover.swift */,
 				50F011A61E1433C700951E37 /* TableViewControllerDiscover.swift */,
 				50F011A81E14368D00951E37 /* CollectionViewCellMovie.swift */,
@@ -215,7 +218,7 @@
 				504485B21E1BFBB60030C6B6 /* TableViewCellDF.swift */,
 				504485B41E1BFBED0030C6B6 /* TableViewControllerDF.swift */,
 				50EF34941E434467001F81F4 /* ViewControllerProfil.swift */,
-				50C012E41E436161005612D1 /* ViewControllerResertMotDePasse.swift */,
+				508C8CC61E487ED1003E17CA /* ViewControllerChangeEmail.swift */,
 				50EFDB5C1E141BD800A1445A /* Main.storyboard */,
 				50EFDB5F1E141BD800A1445A /* Assets.xcassets */,
 				50EFDB611E141BD800A1445A /* LaunchScreen.storyboard */,
@@ -310,7 +313,7 @@
 				TargetAttributes = {
 					50EFDB541E141BD800A1445A = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = TV7MS89DG8;
+						DevelopmentTeam = HQJH2FAWDR;
 						ProvisioningStyle = Automatic;
 					};
 					50EFDB681E141BD800A1445A = {
@@ -388,6 +391,7 @@
 				50EF34951E434467001F81F4 /* ViewControllerProfil.swift in Sources */,
 				50F011AD1E145D1E00951E37 /* TableViewCellDescription.swift in Sources */,
 				50C01E431E1A86E000E63124 /* TableViewCellPolicy.swift in Sources */,
+				508C8CC71E487ED1003E17CA /* ViewControllerChangeEmail.swift in Sources */,
 				50EFDB5B1E141BD800A1445A /* ViewControllerLogin.swift in Sources */,
 				50C01E451E1A86F500E63124 /* TableViewControllerPolicy.swift in Sources */,
 				50F011A31E142D1100951E37 /* Categorie.swift in Sources */,
@@ -550,7 +554,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon13;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TV7MS89DG8;
+				DEVELOPMENT_TEAM = HQJH2FAWDR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -568,7 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon13;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = TV7MS89DG8;
+				DEVELOPMENT_TEAM = HQJH2FAWDR;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

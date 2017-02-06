@@ -115,14 +115,14 @@ class TableViewControllerDescription: UITableViewController {
             RemoveMoviePlaylist(identifiant: (currentMovie?._identifiant)!)
             self.favoriteButton?.isHidden = false
             self.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
-            print("le film n'est pas dans la liste")
+            
         }else{
 // la ligne 117 permet d'ajouter le film donc currentMovie a la liste myPlaylist
             myPlaylist.append(currentMovie!)
             
             self.favoriteButton?.isHidden = true
             self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
-            print("le film est maintenant dans myPaylist")
+            
            return
         }
         

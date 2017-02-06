@@ -28,6 +28,27 @@ class ViewControllerProfil: UIViewController, UIImagePickerControllerDelegate, U
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+   
+    
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       
+        print("ADD")
+        
+        if let userPicture = PFUser.current()?["profilePhoto"] as? PFFile {
+           print("ADD1")
+            userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
+                print("ADD2")
+                if (error == nil) {
+                    print("ADD3")
+                    self.profilPhotoView.image = UIImage(data: imageData!)
+                    print("ADD4")
+                }
+            }
+        )}
+
     }
     
     @IBAction func profilPhotoButton(_ sender: Any) {
@@ -40,18 +61,18 @@ class ViewControllerProfil: UIViewController, UIImagePickerControllerDelegate, U
         
         self.present(pickerController, animated: true, completion: nil)
 
+        
     }
 
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
-
-    {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
       
-        profilPhotoView.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
+        //profilPhotoView.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
         
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
         
     }
+
     
     @IBAction func logOutAction(_ sender: Any) {
         

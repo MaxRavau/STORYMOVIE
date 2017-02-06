@@ -125,20 +125,25 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         }
         //Étape8 -> L’application vérifier que le repeat mot de passe ne sois pas vide sinon erreur
         else if self.repeatPassword.text?.isEmpty == true{
-            self.displayMyAlertMessage(userMessage: "Veuillez entrer votre mot de Passe à répéter!")
+            self.displayMyAlertMessage(userMessage: "Veuillez entrer votre mot de Passe à répéter !")
         }
         //Étape 9 -> L’application vérifie si le password et le repeat password sont égal sinon erreur
         else if self.password.text != self.repeatPassword.text{
             self.displayMyAlertMessage(userMessage: "Les deux mots de passe ne sont pas identiques !")
         }
         //Étape 10 -> L’application a tout vérifier , elle va donc envoyer à la base de donné serveur ( BAck4App ) l’email et le mot de passe du nouvelle utilisateur
-        else {register()
+        else if self.profilPhotoImage.image == nil{
+            self.displayMyAlertMessage(userMessage: "Veuillez selectionner votre Photo !")
+            
+        }else {
+            
+            register()}
         //Étape 11 -> L’application reçois une réponse de Back4App
         
         //Étape 12 -> L’application traite la réponse, si il n’y a pas d’erreur alors l’inscription a réussi, sinon afficher l’erreur -> error.debugDescription
-        
+    
         }
-    }
+    
 
     
 // On a crée une fonction de paramètre dictionnaire [String:String] pour ziper la savegarde du dictionnaire
@@ -169,20 +174,37 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         
         let username = adressEmail.text
         let password = self.password.text
+        let userEmail = adressEmail.text
         
         // Defining the user object
         let user = PFUser()
         user.username = username
         user.password = password
+        user.email = userEmail
         
-        let profileImageData = UIImageJPEGRepresentation(profilPhotoImage.image!, 1)
+        print("ADD")
+        let imageData: Data = UIImageJPEGRepresentation(profilPhotoImage.image!, 1.0)!
+        print("Add1")
+        let profileImageFile = PFFile(data: imageData)
+        try!profileImageFile?.save()
+           
+            
+        let user2 = PFUser.current()
+           print("Add3")
+            user2?.setObject(profileImageFile!, forKey: "profilePhoto")
+            print("Add4")
+            user2?.saveInBackground(block: { (success: Bool, error: Error?) in
+            print("Add5")
+            
+                if success == true{
+                    
+                    print("Saving")
+                }
+            })
+            
+    
+    
         
-        if(profileImageData != nil){
-            
-            let profileImageFile = PFFile(data: profileImageData!)
-            user.setObject(profileImageFile!, forKey: "profile_Picture")
-            
-        }
         
 //j'enregistre
         user.signUpInBackground {
@@ -198,6 +220,8 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
             } else {
 // Sinon on dit on met un mesage d'alerte positif
                 self.performSegue(withIdentifier: "segue.discover", sender: self)
+                
+               
                 
             }
         }

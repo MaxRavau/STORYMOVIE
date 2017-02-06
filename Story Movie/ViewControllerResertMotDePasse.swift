@@ -57,9 +57,12 @@ class ViewControllerResertMotDePasse: UIViewController {
              // Afficher le message d'erreur
             }else{
               
-                let message: String = "Un e-mail vous a été envoyé \(adressMail)"
+                let message: String = "Un e-mail vous a été envoyé \(adressMail!)"
                 self.displayMessage(userMessage: message)
             // Afficher le message du succès
+            
+                
+            
             }
         }
     }
