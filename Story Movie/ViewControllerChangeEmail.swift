@@ -11,35 +11,52 @@ import Parse
 
 
 class ViewControllerChangeEmail: UIViewController {
-
+    
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var buttonSave: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        buttonSave.layer.cornerRadius = 15
+        
+        initUI()
+        
         // Do any additional setup after loading the view.
     }
-
+    
+    func initUI(){
+        
+        configureButtons()
+    }
+    
+    func configureButtons(){
+        
+        buttonSave.layer.cornerRadius = 15
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func buttonSaveTap(_ sender: Any) {
-    
-    let username = usernameTextField.text
-    let email = usernameTextField.text
+    func startChangeMailRequest(){
+        
+        let username = usernameTextField.text
+        let email = usernameTextField.text
         
         let user = PFUser.current()!
         user["username"] = username
         user["email"] = email
-    
+        
         user.saveInBackground()
         displayMyAlertMessage(userMessage: "Confirmation votre Email a bien été modifié !")
     }
-
+    
+    @IBAction func buttonSaveTap(_ sender: Any) {
+        
+        startChangeMailRequest()
+    }
+    
     func displayMyAlertMessage(userMessage: String){
         
         let myAlert = UIAlertController(title: "Alerte", message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
@@ -51,7 +68,7 @@ class ViewControllerChangeEmail: UIViewController {
         
         self.present(myAlert, animated: true, completion: nil)
     }
-
+    
     
     
 }

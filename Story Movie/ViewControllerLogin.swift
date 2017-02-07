@@ -13,7 +13,7 @@ import LocalAuthentication
 class ViewControllerLogin: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var buttonConnexion: UIButton!
-
+    
     @IBOutlet var buttonInscription: UIButton!
     
     @IBOutlet var userEmail: UITextField!
@@ -24,38 +24,43 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func connexionButtonTap(_ sender: Any) {
-    
-    //displayGoodConnection()
-    PFUser.logInWithUsername(inBackground: userEmail.text!, password: userPassword.text!) { (user, error) in
-        if error == nil{
-            
-            print(" On a pas d'erreur la connexion a bien fontionné")
-            self.performSegue(withIdentifier: "discover" ,sender: self )
-            
-        }else{
-            self.displayMyAlertMessage(userMessage: "Les identifiants sont incorrects, Recommencez!")
-            print("Il y a une erreur \(error.debugDescription)")
-        }
         
-        }
+        startLoginRequest()
         
     }
-    
     
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        print("contenu dataBase : \(dataBase)")
+        initUI()
         
-        dataBase = getDictionary()
+    }
+    
+    func initUI(){
         
-        print("dataBase save : \(getDictionary())")
-        // Nous avons intégrer dataBase = getDictionary() dans viewDidLoad() pour qu'il soit chargé des le debut de l'application
+        configureTextField()
+        configureButtons()
         
-        userPassword.delegate = self
-        userEmail.delegate = self
+    }
+    
+    func startLoginRequest(){
         
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewControllerLogin.dismissKeyboard)))
+        PFUser.logInWithUsername(inBackground: userEmail.text!, password: userPassword.text!) { (user, error) in
+            if error == nil{
+                
+                print(" On a pas d'erreur la connexion a bien fontionné")
+                self.performSegue(withIdentifier: "discover" ,sender: self )
+                
+            }else{
+                self.displayMyAlertMessage(userMessage: "Les identifiants sont incorrects, Recommencez!")
+                print("Il y a une erreur \(error.debugDescription)")
+            }
+            
+        }
+        
+    }
+    
+    func configureButtons(){
         
         buttonConnexion.layer.cornerRadius = 15
         buttonInscription.layer.cornerRadius = 15
@@ -64,26 +69,22 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         buttonInscription.layer.borderColor = UIColor.black.cgColor
         buttonInscription.layer.borderWidth = 1.5
         
-        
         whiteImage.layer.borderWidth = 1.5
         whiteImage.layer.borderColor = UIColor.black.cgColor
         
-        let testObject = PFObject(className: "TestObject")
-        testObject["foo"] = "bar"
-        testObject.saveInBackground { (success, error) in
-           print("Object has been saved.")
-        }
-        
-        
-        
-        
     }
-        
-    
-    
     override func didReceiveMemoryWarning(){
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func configureTextField() {
+        
+        userPassword.delegate = self
+        userEmail.delegate = self
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewControllerLogin.dismissKeyboard)))
+        
     }
     
     // fonction pour le retour du clavier
@@ -101,25 +102,6 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
     }
     
     
-    func displayGoodConnection(){
-        
-        if (dataBase[userEmail.text!] == "\(userPassword.text!)"){
-            print("La connection est OK")
-            
-            
-            //   displayMyAlertMessage(userMessage: "Connexion OK !")
-            // Tu n auras plus besoin d afficher une alerte
-            self.performSegue(withIdentifier: "discover" ,sender: self )
-            
-        } else {
-            
-            print("Les identifiants ne sont pas bons. Réessayer!")
-            displayMyAlertMessage(userMessage: "Les identifiants sont incorrects, Recommencez!")
-            return
-            
-            
-        }
-    }
     
     func displayMyAlertMessage(userMessage: String){
         
@@ -133,20 +115,5 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         self.present(myAlert, animated: true, completion: nil)
     }
     
-    
-    func getDictionary() -> [String : String] {
-        // On  récupère object dans le UserDefault stocké à la clé "dictionnary"
-        if ( UserDefaults.standard.object(forKey: "dictionary") == nil){
-            // On créer une base vide
-            let dic : [String: String] = ["user" : "user"]
-            // On sauvegarde cette base
-            UserDefaults.standard.set(dic, forKey: "dictionary")
-        }
-        return UserDefaults.standard.object(forKey: "dictionary") as! [String : String]
-    }
-    
-    
-
-
 }
 

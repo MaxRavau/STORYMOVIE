@@ -9,14 +9,14 @@
 import UIKit
 
 class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UICollectionViewDataSource {
-   
+    
     var selectedIndex: Int = 0
     var selectedMovie: Movie?
     
     @IBOutlet var labelCategorie: UILabel!
     @IBOutlet var myCollectionView: UICollectionView!
     
-        
+    
     var currentCategorie: Categorie?
     // Variable créer pour faire passer la variable avec le segue de tableView ControllerDiscover a ViewControllerMovie
     override func viewDidLoad() {
@@ -77,11 +77,11 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     override func prepare(for segue: UIStoryboardSegue?, sender: Any?) {
         
         if (segue?.identifier == "AG"){
-        
-        let nextScene = segue?.destination as! TableViewControllerDescription
-        
-        nextScene.currentMovie = self.selectedMovie
-        
+            
+            let nextScene = segue?.destination as! TableViewControllerDescription
+            
+            nextScene.currentMovie = self.selectedMovie
+            
         }
     }
     

@@ -32,7 +32,7 @@
 		50EFDB631E141BD800A1445A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50EFDB611E141BD800A1445A /* LaunchScreen.storyboard */; };
 		50EFDB6E1E141BD800A1445A /* Story_MovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFDB6D1E141BD800A1445A /* Story_MovieTests.swift */; };
 		50EFDB791E141BD800A1445A /* Story_MovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFDB781E141BD800A1445A /* Story_MovieUITests.swift */; };
-		50F0119D1E14266800951E37 /* ViewControllerSingUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F0119C1E14266800951E37 /* ViewControllerSingUp.swift */; };
+		50F0119D1E14266800951E37 /* ViewControllerSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F0119C1E14266800951E37 /* ViewControllerSignUp.swift */; };
 		50F0119F1E142C6500951E37 /* Constante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F0119E1E142C6500951E37 /* Constante.swift */; };
 		50F011A11E142CFF00951E37 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F011A01E142CFF00951E37 /* Movie.swift */; };
 		50F011A31E142D1100951E37 /* Categorie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F011A21E142D1100951E37 /* Categorie.swift */; };
@@ -96,7 +96,7 @@
 		50EFDB741E141BD800A1445A /* Story MovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Story MovieUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EFDB781E141BD800A1445A /* Story_MovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story_MovieUITests.swift; sourceTree = "<group>"; };
 		50EFDB7A1E141BD800A1445A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		50F0119C1E14266800951E37 /* ViewControllerSingUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSingUp.swift; sourceTree = "<group>"; };
+		50F0119C1E14266800951E37 /* ViewControllerSignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSignUp.swift; sourceTree = "<group>"; };
 		50F0119E1E142C6500951E37 /* Constante.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constante.swift; sourceTree = "<group>"; };
 		50F011A01E142CFF00951E37 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		50F011A21E142D1100951E37 /* Categorie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categorie.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				50F011A21E142D1100951E37 /* Categorie.swift */,
 				50F0119E1E142C6500951E37 /* Constante.swift */,
 				50EFDB5A1E141BD800A1445A /* ViewControllerLogin.swift */,
-				50F0119C1E14266800951E37 /* ViewControllerSingUp.swift */,
+				50F0119C1E14266800951E37 /* ViewControllerSignUp.swift */,
 				50C012E41E436161005612D1 /* ViewControllerResertMotDePasse.swift */,
 				50F011A41E14316400951E37 /* TableViewCellDiscover.swift */,
 				50F011A61E1433C700951E37 /* TableViewControllerDiscover.swift */,
@@ -383,7 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50F011A91E14368D00951E37 /* CollectionViewCellMovie.swift in Sources */,
-				50F0119D1E14266800951E37 /* ViewControllerSingUp.swift in Sources */,
+				50F0119D1E14266800951E37 /* ViewControllerSignUp.swift in Sources */,
 				50F011B11E146AA000951E37 /* CollectionViewCellFavorite.swift in Sources */,
 				50F011AF1E145FCC00951E37 /* TableViewControllerDescription.swift in Sources */,
 				50F011B31E146AB500951E37 /* ViewControllerFavorite.swift in Sources */,

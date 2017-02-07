@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 
 
@@ -59,6 +60,7 @@ func thisMovieIsInPlaylist(film: Movie) -> Bool{
     }
     return false
 }
+
 
 
 

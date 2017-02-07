@@ -10,10 +10,10 @@ import UIKit
 
 
 class TableViewControllerDescription: UITableViewController {
-
+    
     var currentMovie: Movie?
-
-// On a crée la variable favoriteButton
+    
+    // On a crée la variable favoriteButton
     var favoriteButton: UIButton?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,15 +56,15 @@ class TableViewControllerDescription: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-            
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Prototype4", for: indexPath) as! TableViewCellDescription
         
-            cell.labelTitre.text = currentMovie?._titre
-            cell.labelAnnee.text = currentMovie?._annee
-            cell.imageCover.image = currentMovie?._image
-            cell.labelMinute.text = currentMovie?._duree
-            cell.labelSousTitre.text = currentMovie?._sousTitre
-            self.favoriteButton = cell.favoriteButton
+        cell.labelTitre.text = currentMovie?._titre
+        cell.labelAnnee.text = currentMovie?._annee
+        cell.imageCover.image = currentMovie?._image
+        cell.labelMinute.text = currentMovie?._duree
+        cell.labelSousTitre.text = currentMovie?._sousTitre
+        self.favoriteButton = cell.favoriteButton
         
         let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
         if MovieInPlaylist == false{
@@ -80,15 +80,15 @@ class TableViewControllerDescription: UITableViewController {
             print("le film est maintenant dans myPaylist")
             
         }
-
         
-//On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
-            return cell
-            
-        }
+        
+        //On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
+        return cell
+        
+    }
     
     @IBAction func ShareMovie(_ sender: UIButton) {
-    
+        
         // image to share
         let image: UIImage = (currentMovie?._image)!
         
@@ -102,14 +102,14 @@ class TableViewControllerDescription: UITableViewController {
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
-    
+        
     }
     
     @IBAction func buttonTapFavorite(_ sender: Any)-> Void {
-    
-// on a crée une variable avec la fonction crée dans constante pour déclarer le film
-       let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
-// on intègre une condition si la variable == true alors
+        
+        // on a crée une variable avec la fonction crée dans constante pour déclarer le film
+        let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
+        // on intègre une condition si la variable == true alors
         if MovieInPlaylist == true{
             
             RemoveMoviePlaylist(identifiant: (currentMovie?._identifiant)!)
@@ -117,69 +117,69 @@ class TableViewControllerDescription: UITableViewController {
             self.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
             
         }else{
-// la ligne 117 permet d'ajouter le film donc currentMovie a la liste myPlaylist
+            // la ligne 117 permet d'ajouter le film donc currentMovie a la liste myPlaylist
             myPlaylist.append(currentMovie!)
             
             self.favoriteButton?.isHidden = true
             self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
             
-           return
+            return
         }
         
-}
-
-
-
+    }
     
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+    
 }

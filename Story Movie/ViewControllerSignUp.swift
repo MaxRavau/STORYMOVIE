@@ -1,5 +1,5 @@
 //
-//  ViewControllerSingUp.swift
+//  ViewControllerSignUp.swift
 //  Story Movie
 //
 //  Created by Maxime Ravau on 28/12/2016.
@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet var adressEmail: UITextField!
     
     @IBOutlet var password: UITextField!
@@ -25,7 +25,20 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("\(dataBase)")
+        
+        initUI()
+        
+        
+    }
+    
+    func initUI(){
+        
+        configureButtons()
+        configureTextField()
+        
+    }
+    
+    func configureTextField(){
         
         repeatPassword.delegate = self
         adressEmail.delegate = self
@@ -33,7 +46,11 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         // retour clavier
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewControllerSingUp.dismissKeyboard)))
-        // Do any additional setup after loading the view.
+        
+        
+    }
+    
+    func configureButtons(){
         
         buttonConfirmer.layer.cornerRadius = 20
         buttonConfirmer.layer.borderColor = UIColor.black.cgColor
@@ -48,6 +65,7 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         
         whiteImage.layer.borderWidth = 1.5
         whiteImage.layer.borderColor = UIColor.black.cgColor
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,29 +74,29 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     @IBAction func BackLogin(_ sender: UIButton) {
-    
         
-    self.navigationController?.popViewController(animated: true)
-    
+        
+        self.navigationController?.popViewController(animated: true)
+        
     }
     
-        // fonction pour le retour du clavier
+    // fonction pour le retour du clavier
     func dismissKeyboard() {
         
         adressEmail.resignFirstResponder()
         password.resignFirstResponder()
         repeatPassword.resignFirstResponder()
         
-        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         return  true
     }
-
-    @IBAction func takePictureButton(_ sender: Any) {
     
+    @IBAction func takePictureButton(_ sender: Any) {
+        
         let pickerController = UIImagePickerController()
         
         pickerController.delegate = self
@@ -87,22 +105,26 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         
         self.present(pickerController, animated: true, completion: nil)
         
-
-    
+        
+        
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
-        
-    {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
         
         profilPhotoImage.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
         
         self.dismiss(animated: true, completion: nil)
         
     }
-
-    @IBAction func connexionButtonTap(_ sender: Any) {
     
+    @IBAction func connexionButtonTap(_ sender: Any) {
+        
+        startSignUp()
+        
+    }
+    
+    func startSignUp(){
+        
         //Étape 1 -> L’utilisateur entre son email
         //Étape 2 -> L’utilisateur entre son mot de passe
         //Étape 3 -> L’utilisateur entre son repeat mot de passe
@@ -115,45 +137,40 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         var password = self.password.text
         var repPassword = repeatPassword.text
         
-        //Étape6 -> L’application vérifier que l’email ne sois pas vide sinon erreur
-        if self.adressEmail.text?.isEmpty == true{
-            self.displayMyAlertMessage(userMessage: "Veuillez entrez votre Email !")
-        }
-        //Étape7 -> L’application vérifie que le mot de passe ne sois pas vide sinon erreur
-        else if self.password.text?.isEmpty == true{
-            self.displayMyAlertMessage(userMessage: "Veuillez entrer votre mot de Passe !")
-        }
-        //Étape8 -> L’application vérifier que le repeat mot de passe ne sois pas vide sinon erreur
-        else if self.repeatPassword.text?.isEmpty == true{
-            self.displayMyAlertMessage(userMessage: "Veuillez entrer votre mot de Passe à répéter !")
-        }
-        //Étape 9 -> L’application vérifie si le password et le repeat password sont égal sinon erreur
-        else if self.password.text != self.repeatPassword.text{
-            self.displayMyAlertMessage(userMessage: "Les deux mots de passe ne sont pas identiques !")
-        }
-        //Étape 10 -> L’application a tout vérifier , elle va donc envoyer à la base de donné serveur ( BAck4App ) l’email et le mot de passe du nouvelle utilisateur
-        else if self.profilPhotoImage.image == nil{
-            self.displayMyAlertMessage(userMessage: "Veuillez selectionner votre Photo !")
-            
-        }else {
-            
-            register()}
+        checkIfUserCanSignUp()
+        
         //Étape 11 -> L’application reçois une réponse de Back4App
         
         //Étape 12 -> L’application traite la réponse, si il n’y a pas d’erreur alors l’inscription a réussi, sinon afficher l’erreur -> error.debugDescription
-    
-        }
-    
-
-    
-// On a crée une fonction de paramètre dictionnaire [String:String] pour ziper la savegarde du dictionnaire
-    func setCustomDictionary(dict: [String: String]) {
-        
-        UserDefaults.standard.set(dict, forKey: "dictionary")
     }
     
-    
-    
+    func checkIfUserCanSignUp(){
+
+        // Etape6 -> L'application vérifie que l'adresse ne soit pas vide sinon erreur
+        if self.adressEmail.text?.isEmpty == true{
+            self.displayMyAlertMessage(userMessage: "Veuillez entrez votre Email !")
+        }
+            //Étape7 -> L’application vérifie que le mot de passe ne sois pas vide sinon erreur
+        else if self.password.text?.isEmpty == true{
+            self.displayMyAlertMessage(userMessage: "Veuillez entrer votre mot de Passe !")
+        }
+            //Étape8 -> L’application vérifier que le repeat mot de passe ne sois pas vide sinon erreur
+        else if self.repeatPassword.text?.isEmpty == true{
+            self.displayMyAlertMessage(userMessage: "Veuillez entrer votre mot de Passe à répéter !")
+        }
+            //Étape 9 -> L’application vérifie si le password et le repeat password sont égal sinon erreur
+        else if self.password.text != self.repeatPassword.text{
+            self.displayMyAlertMessage(userMessage: "Les deux mots de passe ne sont pas identiques !")
+        }
+            //Étape 10 -> L’application a tout vérifier , elle va donc envoyer à la base de donné serveur ( BAck4App ) l’email et le mot de passe du nouvelle utilisateur
+        else if self.profilPhotoImage.image == nil{
+            self.displayMyAlertMessage(userMessage: "Veuillez selectionner votre Photo !")
+            
+        }else{
+            
+            startSignUpRequest()
+        }
+    }
     func displayMyAlertMessage(userMessage: String){
         
         let myAlert2 = UIAlertController(title: "Erreur", message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
@@ -167,9 +184,9 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         
         
     }
-
     
-    func register(){
+    
+    func startSignUpRequest(){
         
         
         let username = adressEmail.text
@@ -182,54 +199,47 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         user.password = password
         user.email = userEmail
         
-        print("ADD")
-        let imageData: Data = UIImageJPEGRepresentation(profilPhotoImage.image!, 1.0)!
-        print("Add1")
+        
+        let imageData: Data = UIImageJPEGRepresentation(profilPhotoImage.image!, 0.5)!
+        
         let profileImageFile = PFFile(data: imageData)
-        try!profileImageFile?.save()
-           
-            
-        let user2 = PFUser.current()
-           print("Add3")
-            user2?.setObject(profileImageFile!, forKey: "profilePhoto")
-            print("Add4")
-            user2?.saveInBackground(block: { (success: Bool, error: Error?) in
-            print("Add5")
-            
-                if success == true{
-                    
-                    print("Saving")
-                }
-            })
-            
-    
-    
         
+        user.setObject(profileImageFile!, forKey: "profilePhoto")
         
-//j'enregistre
+        user.saveInBackground(block: { (success: Bool, error: Error?) in
+            
+            if success == true{
+                
+                print("Saving")
+            }
+
+            
+        })
+        
+        //j'enregistre
         user.signUpInBackground {
             (success, error) -> Void in
             
-// si il y a une erreur
+            // si il y a une erreur
             if let error = error as NSError? {
                 let errorString = error.userInfo["error"] as? NSString
                 self.displayMyAlertMessage(userMessage: "Cette Adresse Mail est déjà utilisé!")
                 print("Il y a une erreur \(error.debugDescription)")
-// On met un un message d'alerte
+                // On met un un message d'alerte
                 
             } else {
-// Sinon on dit on met un mesage d'alerte positif
+                // Sinon on dit on met un mesage d'alerte positif
                 self.performSegue(withIdentifier: "segue.discover", sender: self)
                 
-               
+                
                 
             }
         }
     }
 }
-        
 
-    
-    
-        
-       
+
+
+
+
+

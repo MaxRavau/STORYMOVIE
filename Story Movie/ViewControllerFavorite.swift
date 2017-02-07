@@ -12,19 +12,19 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
     
     var selectedMovie: Movie?
     
-   
+    
     @IBOutlet var myCollectionViewFavorite: UICollectionView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        
         self.myCollectionViewFavorite.delegate = self
         
         self.myCollectionViewFavorite.dataSource = self
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()
@@ -32,7 +32,7 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         // Dispose of any resources that can be recreated.
     }
     
-   
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         return 1
@@ -58,33 +58,33 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         
         return cell
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
-
-//chaque fois que arrives sur cette page tu mets à jour le contenu de la page
+        
+        //chaque fois que arrives sur cette page tu mets à jour le contenu de la page
         
         super.viewWillAppear(animated)
-
+        
         myCollectionViewFavorite.reloadData()
         
-        }
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         self.selectedMovie = myPlaylist[indexPath.row]
-    
+        
         self.performSegue(withIdentifier: "AD", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if(segue.identifier == "AD"){
-        
+            
             let nextScene = segue.destination as! TableViewControllerDF
-        
+            
             nextScene.currentMovie = self.selectedMovie
-           
+            
         }
-    
+        
     }
     
 }
