@@ -13,6 +13,7 @@ class ViewControllerProfil: UIViewController, UIImagePickerControllerDelegate, U
 
     @IBOutlet var profilPhotoView: UIImageView!
     @IBOutlet var buttonLogOut: UIButton!
+    var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class ViewControllerProfil: UIViewController, UIImagePickerControllerDelegate, U
     func initUI(){
         
         configureButtons()
+        
+        
     }
 
     func configureButtons(){
@@ -43,78 +46,99 @@ class ViewControllerProfil: UIViewController, UIImagePickerControllerDelegate, U
     
     
     }
-    
+    // la fonction qui met a jour la photo du rond
     override func viewWillAppear(_ animated: Bool) {
        
+      getUserProfilePicture()
+    
+    }
+    //la fonction qui permet d'ajouter la photo de profil de l'utilisateur dans le rond
+    func getUserProfilePicture(){
+        
         if let userPicture = PFUser.current()?["profilePhoto"] as? PFFile {
-            print("ADD1")
+            print("get user picture")
             userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
-                print("ADD2")
+                print("get user picture response")
                 if (error == nil) {
-                    print("ADD3")
+                    print("get user picture no error")
                     self.profilPhotoView.image = UIImage(data: imageData!)
-                    print("ADD4")
-                
+                    
+                    
                 }
             })
-
+            
         }
-    }
 
+        
+    }
     
+    //Quand tu cliques sur le button Modifié la librairy s'ouvre
     @IBAction func profilPhotoButton(_ sender: Any) {
     
-    let pickerController = UIImagePickerController()
-    
+        lauchPhotoLibrary()
+        
+        
+    }
+    //la fonction qui me permet d'ouvrir la librairy photo
+    func lauchPhotoLibrary(){
+        
+        let pickerController = UIImagePickerController()
+        
         pickerController.delegate = self
         pickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
         
         self.present(pickerController, animated: true, completion: nil)
-        
-        
-    
-
+ 
         
     }
-    
-    func updateCurrentUserProfilePicture(image: UIImage) {
+    //la fonction qui permet de sauvegarder la photo
+    func saveProfilePicture(){
         
-        let photo = PFFile(name: PFUser.current()!.username, data: UIImagePNGRepresentation(profilPhotoView.image!)!)
-        PFUser.current()!.setObject(photo!, forKey: "profilePhoto")
-        PFUser.current()!.saveInBackground()
+        let imageData: Data = UIImageJPEGRepresentation(profilPhotoView.image!, 0.25)!
+        
+        let profileImageFile = PFFile(data: imageData)
+        
+        PFUser.current()?.setObject(profileImageFile!, forKey: "profilePhoto")
+        
+        PFUser.current()?.saveInBackground(block: { (success: Bool, error: Error?) in
             
-        }
-    
-    
-    
-
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
-      
-        profilPhotoView.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
+            if success == true{
+                
+                print("Saving")
+            }
+        })
+    }
+    // la fonction qui sert a selectionner la photo et l'enregistrer avec saveProfilePicture
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        updateCurrentUserProfilePicture(image: profilPhotoView.image!)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            print("get original image, prends une photo")
+            profilPhotoView.image = image
+            saveProfilePicture()
+        } else{
+            print("Something went wrong")
+        }
         
         self.dismiss(animated: true, completion: nil)
-        
     }
-
+   
+    // la fonction qui permet de me déconnecter de l'application
+    @IBAction func buttonDeconnexionTap(_ sender: UIButton) {
     
-    @IBAction func logOutAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Deconnexion!", message: "Merci de votre Visite, A très Vite!", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
+            (_)in
+            self.performSegue(withIdentifier: "unwindToMenu", sender: self)
+        })
         
-        
-        PFUser.logOutInBackground { (error: Error?) in
-            
-        if error != nil {
-                
-            } else {
-                self.performSegue(withIdentifier: "segue.deconnexion", sender: self)
-            }
-        }
-        
+        alert.addAction(OKAction)
+        self.present(alert, animated: true, completion: nil)
+    
+    
     }
     
+    // la fonction qui permet d'émettre des messages
     func displayMyAlertMessage(userMessage: String){
         
         let myAlert = UIAlertController(title: "Alerte", message: userMessage, preferredStyle: UIAlertControllerStyle.alert);

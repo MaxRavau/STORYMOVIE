@@ -23,6 +23,10 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
     @IBOutlet var whiteImage: UIImageView!
     
     
+    
+    
+    
+    
     @IBAction func connexionButtonTap(_ sender: Any) {
         
         startLoginRequest()
@@ -101,6 +105,8 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         return  true
     }
     
+    
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue){}
     
     
     func displayMyAlertMessage(userMessage: String){

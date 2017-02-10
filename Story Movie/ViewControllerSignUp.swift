@@ -94,7 +94,7 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         
         return  true
     }
-    
+    //C'est ce qui sert a ouvrir la librairy quand on clique sur le button 
     @IBAction func takePictureButton(_ sender: Any) {
         
         let pickerController = UIImagePickerController()
@@ -108,7 +108,7 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         
         
     }
-    
+    // la fonction qui sert a selectionner la photo, et quitter la page de la librairy
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
         
         profilPhotoImage.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
@@ -143,7 +143,7 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         
         //Étape 12 -> L’application traite la réponse, si il n’y a pas d’erreur alors l’inscription a réussi, sinon afficher l’erreur -> error.debugDescription
     }
-    
+    // la fonction qui permet de faire des conditions d'inscription et si tout est bon alors startSignUpRequest
     func checkIfUserCanSignUp(){
 
         // Etape6 -> L'application vérifie que l'adresse ne soit pas vide sinon erreur
@@ -184,21 +184,8 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         
         
     }
-    
-    
-    func startSignUpRequest(){
-        
-        
-        let username = adressEmail.text
-        let password = self.password.text
-        let userEmail = adressEmail.text
-        
-        // Defining the user object
-        let user = PFUser()
-        user.username = username
-        user.password = password
-        user.email = userEmail
-        
+    //la fonction qui permet de sauvegarder la photo
+    func saveProfilePictureForUser(user: PFUser){
         
         let imageData: Data = UIImageJPEGRepresentation(profilPhotoImage.image!, 0.5)!
         
@@ -212,11 +199,25 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
                 
                 print("Saving")
             }
-
-            
         })
+    }
+    //la fonction qui permet d'enregistrer l'utilisateur dans le serveur Parse
+    func startSignUpRequest(){
         
-        //j'enregistre
+        
+        let username = adressEmail.text
+        let password = self.password.text
+        let userEmail = adressEmail.text
+        
+        // Defining the user object
+        let user = PFUser()
+        user.username = username
+        user.password = password
+        user.email = userEmail
+        
+        saveProfilePictureForUser(user: user)
+        
+                       //j'enregistre
         user.signUpInBackground {
             (success, error) -> Void in
             

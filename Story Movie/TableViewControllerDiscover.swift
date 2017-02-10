@@ -7,28 +7,30 @@
 //
 
 import UIKit
+import Parse
 
 
 class TableViewControllerDiscover: UITableViewController {
     
     var selectedCategorie: Categorie?
     
+    var categorieListe = [PFObject]()
+    
+    @IBOutlet var myTable: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        getCategorieListe()
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     
     
@@ -40,9 +42,9 @@ class TableViewControllerDiscover: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        print("\(listeCategorie.count)")
         
-        return listeCategorie.count
+        print("number : \(categorieListe.count)")
+        return categorieListe.count
         
         // On veut que notre tableau fasse la taille de notre liste
     }
@@ -54,18 +56,51 @@ class TableViewControllerDiscover: UITableViewController {
         // Si le tableau est à 0, il me retourne prototype 2, après le tableau est égal a 1 donc on demande a indexPath.row d'aller chercher l'élément 0 de la liste donc on recule de 1 (indexPath.row - 1)
         // On recule de 1 pour commencer au début de la liste, c'est un décalage.
         
-        let index: Int = indexPath.row
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Prototype2", for: indexPath) as! TableViewCellDiscover
-        
-        let categorie: Categorie = listeCategorie[index]
-        cell.labelTitre.text = categorie._titre
-        cell.labelSousTitre.text = categorie._sousTitre
-        cell.imageCover.image = categorie._imageCover
         
         
-        return cell
+        let usercell = tableView.dequeueReusableCell(withIdentifier: "Prototype2", for: indexPath) as! TableViewCellDiscover
         
+        let categorieObject: PFObject = categorieListe[indexPath.row]
+        
+        usercell.labelTitre.text = categorieObject["title"] as! String?
+        usercell.labelSousTitre.text = categorieObject["sousTitle"] as! String?
+        
+        if let userPicture = categorieObject["imageCover"] as? PFFile {
+                print("get user picture")
+                userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
+                    print("get user picture response")
+                    if (error == nil) {
+                        print("get user picture no error")
+                        usercell.imageCover.image = UIImage(data: imageData!)
+                    }
+                })
+                
+            }
+        
+        return usercell
+        
+    }
+    
+    func getCategorieListe(){
+        
+        var query = PFQuery(className:"Categorie")
+        query.cachePolicy = PFCachePolicy.cacheThenNetwork
+        query.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                print("Successfully retrieved \(objects!.count) scores.")
+                self.categorieListe = objects!
+                self.tableView.reloadData()
+                if let categorieListe = objects {
+                    for categorie in categorieListe {
+                var title = categorie["title"]
+                var sousTitle = categorie["sousTitle"]
+                        print("\(title) \(sousTitle)")
+                      
+                    }
+                }
+            }
+            
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
