@@ -129,8 +129,8 @@ class TableViewControllerDiscover: UITableViewController {
         if (segue?.identifier == "showMovie"){
             //je récupère la catégorie a partir de cette index
             
-            print("showMovie \(selectedCategorie)")
-            nextScene.currentCategorie = self.selectedCategorie
+            print("showMovie \(categorieListe)")
+            nextScene.listeMovie = self.categorieListe
             
             // on récupère la segue pour pouvoir ensuite envoyer une nouvelle catégorie sur le button Coming Soon
         }

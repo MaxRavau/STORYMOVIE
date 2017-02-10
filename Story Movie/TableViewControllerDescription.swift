@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Parse
 
 
 class TableViewControllerDescription: UITableViewController {
     
     var currentMovie: Movie?
+    
+    var movie = [PFObject]()
     
     // On a crée la variable favoriteButton
     var favoriteButton: UIButton?
@@ -59,12 +62,24 @@ class TableViewControllerDescription: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Prototype4", for: indexPath) as! TableViewCellDescription
         
-        cell.labelTitre.text = currentMovie?._titre
-        cell.labelAnnee.text = currentMovie?._annee
-        cell.imageCover.image = currentMovie?._image
-        cell.labelMinute.text = currentMovie?._duree
-        cell.labelSousTitre.text = currentMovie?._sousTitre
+        let movieObject: PFObject = movie[indexPath.row]
+        
+        cell.labelTitre.text = movieObject["title"] as! String?
+        cell.labelAnnee.text = movieObject["annee"] as! String?
+        cell.labelMinute.text = movieObject["minutes"] as! String?
+        cell.labelSousTitre.text = movieObject["sousTitle"] as! String?
         self.favoriteButton = cell.favoriteButton
+        
+        if let userPicture = movieObject["image"] as? PFFile {
+            print("get user picture")
+            userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
+                print("get user picture response")
+                if (error == nil) {
+                    print("get user picture no error")
+                    cell.imageCover.image = UIImage(data: imageData!)
+                }
+            })
+
         
         let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
         if MovieInPlaylist == false{
@@ -83,9 +98,40 @@ class TableViewControllerDescription: UITableViewController {
         
         
         //On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
-        return cell
+        
         
     }
+        return cell
+}
+    
+    
+    func getCategorieListe(){
+        
+        var query = PFQuery(className:"Movie")
+        query.cachePolicy = PFCachePolicy.cacheThenNetwork
+        query.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                print("Successfully retrieved \(objects!.count) scores.")
+                self.movie = objects!
+                self.tableView.reloadData()
+                if let movie = objects {
+                    for movie in movie {
+                        let title = movie["title"]
+                        let sousTitle = movie["sousTitle"]
+                        let annee = movie["annee"]
+                        let minutes = movie["minutes"]
+                        
+                        print("\(title) \(sousTitle) \(annee) \(minutes)")
+                        
+                    }
+                }
+            }
+            
+        }
+    }
+        
+    
+
     
     @IBAction func ShareMovie(_ sender: UIButton) {
         
@@ -129,7 +175,7 @@ class TableViewControllerDescription: UITableViewController {
     }
     
     
-    
+}
     
     
     
@@ -182,4 +228,4 @@ class TableViewControllerDescription: UITableViewController {
      */
     
     
-}
+

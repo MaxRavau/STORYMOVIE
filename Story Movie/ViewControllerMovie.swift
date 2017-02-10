@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import Parse
 
 class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UICollectionViewDataSource {
     
     var selectedIndex: Int = 0
     var selectedMovie: Movie?
     
+    var listeMovie = [PFObject]()
+    
     @IBOutlet var labelCategorie: UILabel!
     @IBOutlet var myCollectionView: UICollectionView!
     
     
     var currentCategorie: Categorie?
+    
+    
     // Variable créer pour faire passer la variable avec le segue de tableView ControllerDiscover a ViewControllerMovie
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,23 +50,35 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
         
         
         
-        return ((currentCategorie?._listeMovie.count)!)
+        return listeMovie.count
+        
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let index: Int = indexPath.row
+        
         
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Prototype3", for: indexPath) as! CollectionViewCellMovie
         
-        let movie: Movie = (currentCategorie?._listeMovie[index])!
-        cell.imageCover.image = movie._image
+        let categorieObject: PFObject = listeMovie[indexPath.row]
         
-        labelCategorie.text = currentCategorie?._titre
         
-        print("\(index)")
+        if let userPicture = categorieObject["image"] as? PFFile {
+            print("get user picture")
+            userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
+                print("get user picture response")
+                if (error == nil) {
+                    print("get user picture no error")
+                    cell.imageCover.image = UIImage(data: imageData!)
+                }
+            })
+            
+        }
+
+        
+       
         
         
         return cell
@@ -80,10 +97,38 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
             
             let nextScene = segue?.destination as! TableViewControllerDescription
             
-            nextScene.currentMovie = self.selectedMovie
+            nextScene.movie = self.listeMovie
             
         }
     }
     
+    func getMovie(){
+        
+        let query = PFQuery(className:"Movie")
+        query.cachePolicy = PFCachePolicy.cacheThenNetwork
+        query.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                print("Successfully retrieved \(objects!.count) scores.")
+                self.listeMovie = objects!
+                //self.view.reloadData()
+                if let listeMovie = objects {
+                    for movie in listeMovie {
+                        let title = movie["title"]
+                        let sousTitle = movie["sousTitle"]
+                        let annee = movie["annee"]
+                        let minutes = movie["minutes"]
+                        
+                        print("\(title) \(sousTitle)")
+                        print("\(minutes)")
+                        print("\(annee)")
+                        
+                    }
+                }
+            }
+            
+        }
+    }
+    
+
 }
 
