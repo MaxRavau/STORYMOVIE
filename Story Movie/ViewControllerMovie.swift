@@ -12,7 +12,7 @@ import Parse
 class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UICollectionViewDataSource {
     
     var selectedIndex: Int = 0
-    var selectedMovie: Movie?
+    var selectedMovie = [PFObject]()
     
     var listeMovie = [PFObject]()
     
@@ -20,14 +20,15 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     @IBOutlet var myCollectionView: UICollectionView!
     
     
-    var currentCategorie: Categorie?
+    //var currentCategorie: Categorie?
     
     
     // Variable créer pour faire passer la variable avec le segue de tableView ControllerDiscover a ViewControllerMovie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("ViewControllerMovie \(currentCategorie?._titre)")
+        getMovie()
+        
         // Do any additional setup after loading the view.
         self.myCollectionView.delegate = self
         self.myCollectionView.dataSource = self
@@ -76,17 +77,12 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
             })
             
         }
-
-        
-       
-        
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        self.selectedMovie = currentCategorie?._listeMovie[indexPath.row]
+        self.selectedMovie = [listeMovie[indexPath.row]]
         
         performSegue(withIdentifier: "AG", sender: nil)
     }
@@ -104,13 +100,13 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     
     func getMovie(){
         
-        let query = PFQuery(className:"Movie")
+        let query = PFQuery(className:"Movies")
         query.cachePolicy = PFCachePolicy.cacheThenNetwork
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 print("Successfully retrieved \(objects!.count) scores.")
                 self.listeMovie = objects!
-                //self.view.reloadData()
+                self.myCollectionView.reloadData()
                 if let listeMovie = objects {
                     for movie in listeMovie {
                         let title = movie["title"]
@@ -128,7 +124,5 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
             
         }
     }
-    
-
 }
 

@@ -12,9 +12,11 @@ import Parse
 
 class TableViewControllerDiscover: UITableViewController {
     
-    var selectedCategorie: Categorie?
+    //var selectedCategorie: Categorie?
     
     var categorieListe = [PFObject]()
+    
+    var selectedCategorie = [PFObject]()
     
     @IBOutlet var myTable: UITableView!
     
@@ -83,7 +85,7 @@ class TableViewControllerDiscover: UITableViewController {
     
     func getCategorieListe(){
         
-        var query = PFQuery(className:"Categorie")
+        let query = PFQuery(className:"Categorie")
         query.cachePolicy = PFCachePolicy.cacheThenNetwork
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
@@ -92,8 +94,8 @@ class TableViewControllerDiscover: UITableViewController {
                 self.tableView.reloadData()
                 if let categorieListe = objects {
                     for categorie in categorieListe {
-                var title = categorie["title"]
-                var sousTitle = categorie["sousTitle"]
+                let title = categorie["title"]
+                let sousTitle = categorie["sousTitle"]
                         print("\(title) \(sousTitle)")
                       
                     }
@@ -111,11 +113,9 @@ class TableViewControllerDiscover: UITableViewController {
         
     }
     
-    
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.selectedCategorie = listeCategorie[indexPath.row]
+        self.selectedCategorie = [categorieListe[indexPath.row]]
         
         self.performSegue(withIdentifier: "showMovie", sender: nil)
     }

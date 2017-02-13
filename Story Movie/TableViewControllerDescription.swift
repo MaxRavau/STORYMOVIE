@@ -21,7 +21,7 @@ class TableViewControllerDescription: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+       getMovieDescription()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -105,9 +105,9 @@ class TableViewControllerDescription: UITableViewController {
 }
     
     
-    func getCategorieListe(){
+    func getMovieDescription(){
         
-        var query = PFQuery(className:"Movie")
+        let query = PFQuery(className:"Movies")
         query.cachePolicy = PFCachePolicy.cacheThenNetwork
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
