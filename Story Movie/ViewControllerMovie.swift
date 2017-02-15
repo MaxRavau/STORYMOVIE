@@ -12,7 +12,7 @@ import Parse
 class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UICollectionViewDataSource {
     
     var selectedIndex: Int = 0
-    var selectedMovie = [PFObject]()
+    var selectedMovie: PFObject?
     
     var listeMovie = [PFObject]()
     
@@ -26,9 +26,9 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     // Variable créer pour faire passer la variable avec le segue de tableView ControllerDiscover a ViewControllerMovie
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("ADD4")
         getMovie()
-        
+        print("ADD5")
         // Do any additional setup after loading the view.
         self.myCollectionView.delegate = self
         self.myCollectionView.dataSource = self
@@ -43,14 +43,14 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         return 1
-        
+        // On met une affiche de chaque film
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         
-        
+        //On return la liste de film entiere
         return listeMovie.count
         
     }
@@ -58,12 +58,11 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
+        // dans cette fonction on return juste la Cover du film
         
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Prototype3", for: indexPath) as! CollectionViewCellMovie
-        
-        let categorieObject: PFObject = listeMovie[indexPath.row]
+                let categorieObject: PFObject = listeMovie[indexPath.row]
         
         
         if let userPicture = categorieObject["image"] as? PFFile {
@@ -82,19 +81,27 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        self.selectedMovie = [listeMovie[indexPath.row]]
+        print("ADD")
+
+        // on selectionne le film  dans la liste de film
+        self.selectedMovie = listeMovie[indexPath.row]
         
+        print("ADD1")
+        // Quand on a sélectionner le film On passe a la description du film
         performSegue(withIdentifier: "AG", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue?, sender: Any?) {
         
+        // Si la segue s'appelle AG
         if (segue?.identifier == "AG"){
-            
+            // alors la prochaine page de destination c'est le tableViewControllerDescription
             let nextScene = segue?.destination as! TableViewControllerDescription
-            
-            nextScene.movie = self.listeMovie
-            
+            // la page d'après on récupère le détail du film de la listeMovie 
+            print("ADD2")
+
+            nextScene.currentMovie = self.selectedMovie!
+            print("ADD3")
         }
     }
     
@@ -112,10 +119,10 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
                         let title = movie["title"]
                         let sousTitle = movie["sousTitle"]
                         let annee = movie["annee"]
-                        let minutes = movie["minutes"]
+                        let duree = movie["duree"]
                         
                         print("\(title) \(sousTitle)")
-                        print("\(minutes)")
+                        print("\(duree)")
                         print("\(annee)")
                         
                     }

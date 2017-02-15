@@ -12,16 +12,16 @@ import Parse
 
 class TableViewControllerDescription: UITableViewController {
     
-    var currentMovie: Movie?
+    var movie: Movie?
     
-    var movie = [PFObject]()
+    var currentMovie: PFObject?
     
     // On a crée la variable favoriteButton
     var favoriteButton: UIButton?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       getMovieDescription()
+        getMovieDescription()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -62,11 +62,11 @@ class TableViewControllerDescription: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Prototype4", for: indexPath) as! TableViewCellDescription
         
-        let movieObject: PFObject = movie[indexPath.row]
+        let movieObject: PFObject = currentMovie!
         
         cell.labelTitre.text = movieObject["title"] as! String?
         cell.labelAnnee.text = movieObject["annee"] as! String?
-        cell.labelMinute.text = movieObject["minutes"] as! String?
+        cell.labelMinute.text = movieObject["duree"] as! String?
         cell.labelSousTitre.text = movieObject["sousTitle"] as! String?
         self.favoriteButton = cell.favoriteButton
         
@@ -77,32 +77,34 @@ class TableViewControllerDescription: UITableViewController {
                 if (error == nil) {
                     print("get user picture no error")
                     cell.imageCover.image = UIImage(data: imageData!)
+                    
                 }
             })
-
-        
-        let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
-        if MovieInPlaylist == false{
-            cell.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
-            cell.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
-            print("le film n'est pas dans la liste")
-            
-        }else{
-            
-            
-            self.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
-            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
-            print("le film est maintenant dans myPaylist")
             
         }
         
+        //let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
+        //if MovieInPlaylist == false{
+           // cell.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
+            //cell.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
+           // print("le film n'est pas dans la liste")
+            
+       // }else{
+            
+            
+            //self.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
+            //self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
+            //print("le film est maintenant dans myPaylist")
+            
+            
+            
+            
+            //On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
+            
+        //}
         
-        //On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
-        
-        
-    }
         return cell
-}
+    }
     
     
     func getMovieDescription(){
@@ -112,16 +114,16 @@ class TableViewControllerDescription: UITableViewController {
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 print("Successfully retrieved \(objects!.count) scores.")
-                self.movie = objects!
+                //self.currentMovie = objects!
                 self.tableView.reloadData()
-                if let movie = objects {
-                    for movie in movie {
+                if let currentMovie = objects {
+                    for movie in currentMovie {
                         let title = movie["title"]
                         let sousTitle = movie["sousTitle"]
                         let annee = movie["annee"]
-                        let minutes = movie["minutes"]
+                        let duree = movie["duree"]
                         
-                        print("\(title) \(sousTitle) \(annee) \(minutes)")
+                        print("\(title) \(sousTitle) \(annee) \(duree)")
                         
                     }
                 }
@@ -129,14 +131,14 @@ class TableViewControllerDescription: UITableViewController {
             
         }
     }
-        
     
-
+    
+    
     
     @IBAction func ShareMovie(_ sender: UIButton) {
         
         // image to share
-        let image: UIImage = (currentMovie?._image)!
+        let image: UIImage = (movie?._image)!
         
         // set up activity view controller
         let imageToShare = [ image ]
@@ -154,17 +156,17 @@ class TableViewControllerDescription: UITableViewController {
     @IBAction func buttonTapFavorite(_ sender: Any)-> Void {
         
         // on a crée une variable avec la fonction crée dans constante pour déclarer le film
-        let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
+        let MovieInPlaylist = thisMovieIsInPlaylist(film: movie!)
         // on intègre une condition si la variable == true alors
         if MovieInPlaylist == true{
             
-            RemoveMoviePlaylist(identifiant: (currentMovie?._identifiant)!)
+            RemoveMoviePlaylist(identifiant: (movie?._identifiant)!)
             self.favoriteButton?.isHidden = false
             self.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
             
         }else{
             // la ligne 117 permet d'ajouter le film donc currentMovie a la liste myPlaylist
-            myPlaylist.append(currentMovie!)
+            myPlaylist.append(movie!)
             
             self.favoriteButton?.isHidden = true
             self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
@@ -174,58 +176,58 @@ class TableViewControllerDescription: UITableViewController {
         
     }
     
-    
 }
-    
-    
-    
-    
-    
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
+
+
+
+
+
+
+
+/*
+ // Override to support conditional editing of the table view.
+ override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+ // Return false if you do not want the specified item to be editable.
+ return true
+ }
+ */
+
+/*
+ // Override to support editing the table view.
+ override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+ if editingStyle == .delete {
+ // Delete the row from the data source
+ tableView.deleteRows(at: [indexPath], with: .fade)
+ } else if editingStyle == .insert {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
+
+/*
+ // Override to support rearranging the table view.
+ override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+ 
+ }
+ */
+
+/*
+ // Override to support conditional rearranging of the table view.
+ override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+ // Return false if you do not want the item to be re-orderable.
+ return true
+ }
+ */
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+
 

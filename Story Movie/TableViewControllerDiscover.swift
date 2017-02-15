@@ -16,7 +16,7 @@ class TableViewControllerDiscover: UITableViewController {
     
     var categorieListe = [PFObject]()
     
-    var selectedCategorie = [PFObject]()
+    var selectedCategorie: PFObject?
     
     @IBOutlet var myTable: UITableView!
     
@@ -115,7 +115,7 @@ class TableViewControllerDiscover: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.selectedCategorie = [categorieListe[indexPath.row]]
+        self.selectedCategorie = categorieListe[indexPath.row]
         
         self.performSegue(withIdentifier: "showMovie", sender: nil)
     }
@@ -130,7 +130,7 @@ class TableViewControllerDiscover: UITableViewController {
             //je récupère la catégorie a partir de cette index
             
             print("showMovie \(categorieListe)")
-            nextScene.listeMovie = self.categorieListe
+            nextScene.listeMovie = [self.selectedCategorie!]
             
             // on récupère la segue pour pouvoir ensuite envoyer une nouvelle catégorie sur le button Coming Soon
         }
