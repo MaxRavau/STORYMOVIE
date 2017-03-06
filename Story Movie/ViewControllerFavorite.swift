@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import Parse
 
 class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
     
     var selectedMovie: Movie?
+    
+    var currentMovie: PFObject?
+    
+    var listeFavorite = [PFObject]()
     
     
     @IBOutlet var myCollectionViewFavorite: UICollectionView!
@@ -42,19 +47,28 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return myPlaylist.count
+        return listeFavorite.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let index: Int = indexPath.row
+        let listObject: PFObject = listeFavorite[indexPath.row]
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Prototype5", for: indexPath) as! CollectionViewCellFavorite
         
-        let movie: Movie = (myPlaylist[index])
-        
-        cell.imageCoverFavorite.image = movie._image
+        if let userPicture = listObject["image"] as? PFFile {
+            print("get user picture")
+            userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
+                print("get user picture response")
+                if (error == nil) {
+                    print("get user picture no error")
+                    cell.imageCoverFavorite.image = UIImage(data: imageData!)
+                    
+                }
+                
+            })
+        }
         
         return cell
     }
@@ -64,6 +78,8 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         //chaque fois que arrives sur cette page tu mets à jour le contenu de la page
         
         super.viewWillAppear(animated)
+        
+        
         
         myCollectionViewFavorite.reloadData()
         
@@ -87,4 +103,49 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         
     }
     
+    func refreshUser(){
+        
+        let user = PFUser.current()
+        
+        user?.fetchInBackground(block: { (object:PFObject?,error: Error?) in
+            
+            
+            
+        })
+        
+    }
+    
+    
+    func refreshMovie(){
+        
+        let user : PFUser = PFUser.current()!
+        
+        //On crée la fonction getListFavorite()
+        let listeFavId = user["liste_favorite"] as! [String]
+        
+        
+        for movieId in listeFavId{
+            
+            
+            let query = PFQuery(className:"Movie")
+            query.getObjectInBackground(withId: movieId) { (movie, error) in
+                
+            }
+            
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
 }
+
+
+
+
+

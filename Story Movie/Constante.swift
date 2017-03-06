@@ -17,6 +17,7 @@ var dataBase:[String:String] = ["Max.ravau@gmail.com" : "Maxmax"]
 var myPlaylist: [Movie] = []
 
 
+
 // On a crée la fonction removeMoviePlaylist avec un paramètre INT
 func RemoveMoviePlaylist(identifiant:Int){
 // on crée une variable counter est on l'a déclare à 0

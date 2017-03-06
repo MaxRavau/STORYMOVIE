@@ -67,6 +67,7 @@
 /* Begin PBXFileReference section */
 		504485B21E1BFBB60030C6B6 /* TableViewCellDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellDF.swift; sourceTree = "<group>"; };
 		504485B41E1BFBED0030C6B6 /* TableViewControllerDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerDF.swift; sourceTree = "<group>"; };
+		505C1C241E575E2A00D192CB /* MRLibrary.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MRLibrary.playground; sourceTree = "<group>"; };
 		505D35151E36124F00E7D95F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		505D35171E36125C00E7D95F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		505D35191E36127400E7D95F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -223,6 +224,7 @@
 				50EFDB5F1E141BD800A1445A /* Assets.xcassets */,
 				50EFDB611E141BD800A1445A /* LaunchScreen.storyboard */,
 				50EFDB641E141BD800A1445A /* Info.plist */,
+				505C1C241E575E2A00D192CB /* MRLibrary.playground */,
 			);
 			path = "Story Movie";
 			sourceTree = "<group>";

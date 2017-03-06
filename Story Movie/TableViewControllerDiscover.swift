@@ -24,7 +24,7 @@ class TableViewControllerDiscover: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getCategorieListe()
+        initUI()
         
     }
     
@@ -33,7 +33,11 @@ class TableViewControllerDiscover: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    func initUI(){
+        
+        
+        getCategorieListe()
+    }
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -68,16 +72,16 @@ class TableViewControllerDiscover: UITableViewController {
         usercell.labelSousTitre.text = categorieObject["sousTitle"] as! String?
         
         if let userPicture = categorieObject["imageCover"] as? PFFile {
-                print("get user picture")
-                userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
-                    print("get user picture response")
-                    if (error == nil) {
-                        print("get user picture no error")
-                        usercell.imageCover.image = UIImage(data: imageData!)
-                    }
-                })
-                
-            }
+            print("get user picture")
+            userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
+                print("get user picture response")
+                if (error == nil) {
+                    print("get user picture no error")
+                    usercell.imageCover.image = UIImage(data: imageData!)
+                }
+            })
+            
+        }
         
         return usercell
         
@@ -94,10 +98,10 @@ class TableViewControllerDiscover: UITableViewController {
                 self.tableView.reloadData()
                 if let categorieListe = objects {
                     for categorie in categorieListe {
-                let title = categorie["title"]
-                let sousTitle = categorie["sousTitle"]
+                        let title = categorie["title"]
+                        let sousTitle = categorie["sousTitle"]
                         print("\(title) \(sousTitle)")
-                      
+                        
                     }
                 }
             }
@@ -130,7 +134,7 @@ class TableViewControllerDiscover: UITableViewController {
             //je récupère la catégorie a partir de cette index
             
             print("showMovie \(categorieListe)")
-            nextScene.listeMovie = [self.selectedCategorie!]
+            nextScene.currentCategorie = self.selectedCategorie!
             
             // on récupère la segue pour pouvoir ensuite envoyer une nouvelle catégorie sur le button Coming Soon
         }

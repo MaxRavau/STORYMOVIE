@@ -16,18 +16,24 @@ class TableViewControllerDescription: UITableViewController {
     
     var currentMovie: PFObject?
     
-    // On a crée la variable favoriteButton
+    var listeFavorite: [PFObject?] = []
+    
     var favoriteButton: UIButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getMovieDescription()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        initUI()
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    func initUI(){
+        
+        getMovieDescription()
+        
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         
         self.tableView.reloadData()
@@ -85,22 +91,22 @@ class TableViewControllerDescription: UITableViewController {
         
         //let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
         //if MovieInPlaylist == false{
-           // cell.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
-            //cell.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
-           // print("le film n'est pas dans la liste")
-            
-       // }else{
-            
-            
-            //self.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
-            //self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
-            //print("le film est maintenant dans myPaylist")
-            
-            
-            
-            
-            //On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
-            
+        // cell.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
+        //cell.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
+        // print("le film n'est pas dans la liste")
+        
+        // }else{
+        
+        
+        //self.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
+        //self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
+        //print("le film est maintenant dans myPaylist")
+        
+        
+        
+        
+        //On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
+        
         //}
         
         return cell
@@ -111,6 +117,7 @@ class TableViewControllerDescription: UITableViewController {
         
         let query = PFQuery(className:"Movies")
         query.cachePolicy = PFCachePolicy.cacheThenNetwork
+        query.whereKey("liste_favorite", equalTo: "identifiant")
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 print("Successfully retrieved \(objects!.count) scores.")
@@ -155,26 +162,55 @@ class TableViewControllerDescription: UITableViewController {
     
     @IBAction func buttonTapFavorite(_ sender: Any)-> Void {
         
-        // on a crée une variable avec la fonction crée dans constante pour déclarer le film
-        let MovieInPlaylist = thisMovieIsInPlaylist(film: movie!)
-        // on intègre une condition si la variable == true alors
-        if MovieInPlaylist == true{
-            
-            RemoveMoviePlaylist(identifiant: (movie?._identifiant)!)
-            self.favoriteButton?.isHidden = false
-            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
-            
-        }else{
-            // la ligne 117 permet d'ajouter le film donc currentMovie a la liste myPlaylist
-            myPlaylist.append(movie!)
-            
-            self.favoriteButton?.isHidden = true
-            self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
-            
-            return
-        }
+        
+        SaveMovieUser()
         
     }
+    
+    
+    func SaveMovieUser() {
+        
+        let currentUser = PFUser.current()
+        currentUser?.addUniqueObject(self.currentMovie!.objectId!, forKey: "liste_favorite")
+        currentUser?.saveInBackground(block: { (success, error) -> Void in
+            if error != nil {
+                print("error")
+            } else {
+                print("le \(self.currentMovie) est bien dans la liste des favoris")
+            }
+        })
+    }
+    
+    func getListFavorite(){
+        //On crée la fonction getListFavorite()
+        let query = PFQuery(className:"User")
+        // On crée une variable query qui est egal a la classe User
+        query.cachePolicy = PFCachePolicy.cacheThenNetwork
+        
+        query.findObjectsInBackground { (objects, error) in
+            // dans la variable on recherche les objects et les erreurs
+            if error == nil {
+                //Si il ya pas d'erreur
+                print("Successfully retrieved \(objects!.count) scores.")
+                self.tableView.reloadData()
+                //Mettre le tableau a jour
+                if let listeFavorite = objects {
+                    //si la variable listefavorite = a object
+                    for favoris in listeFavorite {
+                        // pour favoris dans la listeFavorite
+                        let listeFavorite = favoris["liste_favorite"]
+                        //la variable liste_favorite est égal a favoris["liste_favorite"]
+                        print("\(listeFavorite)")
+                    }
+                }
+            }
+            
+        }
+        
+        
+    }
+    
+    
     
 }
 

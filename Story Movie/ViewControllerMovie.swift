@@ -12,26 +12,42 @@ import Parse
 class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UICollectionViewDataSource {
     
     var selectedIndex: Int = 0
+    
     var selectedMovie: PFObject?
     
     var listeMovie = [PFObject]()
     
     @IBOutlet var labelCategorie: UILabel!
+    
     @IBOutlet var myCollectionView: UICollectionView!
     
-    
-    //var currentCategorie: Categorie?
+    var currentCategorie: PFObject?
     
     
     // Variable créer pour faire passer la variable avec le segue de tableView ControllerDiscover a ViewControllerMovie
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ADD4")
-        getMovie()
-        print("ADD5")
+        
         // Do any additional setup after loading the view.
         self.myCollectionView.delegate = self
         self.myCollectionView.dataSource = self
+        
+        initUI()
+        
+    }
+    
+    func initUI(){
+        
+        getTitle()
+        getMovie()
+    }
+    
+    
+    func getTitle(){
+        
+        var categorieTitle = currentCategorie?["title"]
+        
+        labelCategorie.text = categorieTitle as! String?
         
     }
     
@@ -62,7 +78,7 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
         
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Prototype3", for: indexPath) as! CollectionViewCellMovie
-                let categorieObject: PFObject = listeMovie[indexPath.row]
+        let categorieObject: PFObject = listeMovie[indexPath.row]
         
         
         if let userPicture = categorieObject["image"] as? PFFile {
@@ -82,7 +98,7 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("ADD")
-
+        
         // on selectionne le film  dans la liste de film
         self.selectedMovie = listeMovie[indexPath.row]
         
@@ -97,9 +113,9 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
         if (segue?.identifier == "AG"){
             // alors la prochaine page de destination c'est le tableViewControllerDescription
             let nextScene = segue?.destination as! TableViewControllerDescription
-            // la page d'après on récupère le détail du film de la listeMovie 
+            // la page d'après on récupère le détail du film de la listeMovie
             print("ADD2")
-
+            
             nextScene.currentMovie = self.selectedMovie!
             print("ADD3")
         }
@@ -108,6 +124,7 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
     func getMovie(){
         
         let query = PFQuery(className:"Movies")
+        query.whereKey("categorie_movie", equalTo: currentCategorie)
         query.cachePolicy = PFCachePolicy.cacheThenNetwork
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
