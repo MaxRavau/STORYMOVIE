@@ -60,6 +60,7 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        print("count listeFavorite \(listeFavorite.count)")
         return listeFavorite.count
     }
     
@@ -142,6 +143,8 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         
             
             
+            var movieDownloadedCount : Int =  0
+            
             for movieId in listeFavId{
                 print("4")
                 //On fait une boucle sur la listeFavorite
@@ -151,19 +154,21 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
                 query.getObjectInBackground(withId: movieId) { (movie, error) in
                     
                     print("6")
-                    
+                    movieDownloadedCount += 1
                     print("\(movieId)")
                     //Et on fait un getObjectInBackground le movie a partir d'un objectID
                     self.listeFavorite.append(movie!)
                     
                     print("7")
                     
+                    if(movieDownloadedCount == listeFavId.count){
+                        self.myCollectionViewFavorite.reloadData()
+                    }
                 }
                 
                 
                 
             }
-            myCollectionViewFavorite.reloadData()
             // Sa permet d'afficher la collectionView en prenant compte que le tableau est rempli
         }
         
