@@ -71,6 +71,8 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Prototype5", for: indexPath) as! CollectionViewCellFavorite
         
         let listObject: PFObject = listeFavorite[indexPath.row]
+        
+        
         cell.backgroundColor = UIColor.red
         if let userPicture = listObject["image"] as? PFFile {
             print("get user picture")
@@ -80,7 +82,10 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
                 if (error == nil) {
                     print("ex : \(imageData!)")
                     print("get user picture no error")
-                    cell.imageCoverFavorite.image = UIImage(data: imageData!)
+                    
+                    DispatchQueue.main.async {
+                        cell.imageCoverFavorite.image = UIImage(data: imageData!)
+                    }
                     
                 }
                 
@@ -151,24 +156,35 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
                 let query = PFQuery(className:"Movies")
                 
                 print("5")
+                query.cachePolicy = PFCachePolicy.cacheThenNetwork
                 query.getObjectInBackground(withId: movieId) { (movie, error) in
                     
-                    print("6")
-                    movieDownloadedCount += 1
-                    print("\(movieId)")
-                    //Et on fait un getObjectInBackground le movie a partir d'un objectID
-                    self.listeFavorite.append(movie!)
+                    if(movie != nil){
                     
-                    print("7")
-                    
-                    if(movieDownloadedCount == listeFavId.count){
-                        self.myCollectionViewFavorite.reloadData()
+                        print("6")
+                        movieDownloadedCount += 1
+                        print("\(movieId)")
+                        //Et on fait un getObjectInBackground le movie a partir d'un objectID
+                        
+                        self.listeFavorite.append(movie!)
+                        
+                        print("7 movie count \(movieDownloadedCount) && listfav count \(listeFavId.count)")
+                        
+                        if(movieDownloadedCount == listeFavId.count){
+                            self.listeFavorite.sort(by: { $0.updatedAt?.compare($1.updatedAt!) == .orderedAscending})
+                            
+                            self.myCollectionViewFavorite.reloadData()
+                        }
                     }
+
                 }
                 
                 
                 
             }
+            
+            
+
             // Sa permet d'afficher la collectionView en prenant compte que le tableau est rempli
         }
         
