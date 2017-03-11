@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Parse
 
 class TableViewControllerDF: UITableViewController {
+    
+    var currentMovie1: PFObject?
     
     var currentMovie: Movie?
     

@@ -90,6 +90,7 @@ class TableViewControllerDescription: UITableViewController {
         }
         
         //let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
+    
         //if MovieInPlaylist == false{
         // cell.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
         //cell.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)

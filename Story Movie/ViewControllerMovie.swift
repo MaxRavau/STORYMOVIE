@@ -11,7 +11,6 @@ import Parse
 
 class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UICollectionViewDataSource {
     
-    var selectedIndex: Int = 0
     
     var selectedMovie: PFObject?
     

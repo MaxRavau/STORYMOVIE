@@ -11,9 +11,8 @@ import Parse
 
 class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
     
-    var selectedMovie: Movie?
     
-    var currentMovie: PFObject?
+    var selectedMovie: PFObject?
     
     var listeFavorite = [PFObject]()
     
@@ -27,8 +26,13 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         self.myCollectionViewFavorite.delegate = self
         
         self.myCollectionViewFavorite.dataSource = self
+        
+        initUI()
+        
         // Do any additional setup after loading the view.
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         
@@ -36,6 +40,15 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         
         // Dispose of any resources that can be recreated.
     }
+    
+    func initUI(){
+        
+        
+        
+        
+        
+    }
+    
     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -53,15 +66,18 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let listObject: PFObject = listeFavorite[indexPath.row]
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Prototype5", for: indexPath) as! CollectionViewCellFavorite
         
+        let listObject: PFObject = listeFavorite[indexPath.row]
+        cell.backgroundColor = UIColor.red
         if let userPicture = listObject["image"] as? PFFile {
             print("get user picture")
             userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
                 print("get user picture response")
+                print("erreur Image")
                 if (error == nil) {
+                    print("ex : \(imageData!)")
                     print("get user picture no error")
                     cell.imageCoverFavorite.image = UIImage(data: imageData!)
                     
@@ -80,13 +96,15 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         super.viewWillAppear(animated)
         
         
+        refreshUser()
+        getFavorisList()
         
-        myCollectionViewFavorite.reloadData()
+        
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        self.selectedMovie = myPlaylist[indexPath.row]
+        self.selectedMovie = listeFavorite[indexPath.row]
         
         self.performSegue(withIdentifier: "AD", sender: nil)
     }
@@ -97,7 +115,7 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
             
             let nextScene = segue.destination as! TableViewControllerDF
             
-            nextScene.currentMovie = self.selectedMovie
+            nextScene.currentMovie1 = self.selectedMovie
             
         }
         
@@ -109,41 +127,56 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         
         user?.fetchInBackground(block: { (object:PFObject?,error: Error?) in
             
-            
-            
         })
         
     }
     
     
-    func refreshMovie(){
+    func getFavorisList(){
         
+        print("1")
+        self.listeFavorite.removeAll()
         let user : PFUser = PFUser.current()!
+        print("2")
+        if let listeFavId = user["liste_favorite"] as? [String] {
         
-        //On crée la fonction getListFavorite()
-        let listeFavId = user["liste_favorite"] as! [String]
-        
-        
-        for movieId in listeFavId{
             
             
-            let query = PFQuery(className:"Movie")
-            query.getObjectInBackground(withId: movieId) { (movie, error) in
+            for movieId in listeFavId{
+                print("4")
+                //On fait une boucle sur la listeFavorite
+                let query = PFQuery(className:"Movies")
+                
+                print("5")
+                query.getObjectInBackground(withId: movieId) { (movie, error) in
+                    
+                    print("6")
+                    
+                    print("\(movieId)")
+                    //Et on fait un getObjectInBackground le movie a partir d'un objectID
+                    self.listeFavorite.append(movie!)
+                    
+                    print("7")
+                    
+                }
+                
+                
                 
             }
-            
-            
-            
+            myCollectionViewFavorite.reloadData()
+            // Sa permet d'afficher la collectionView en prenant compte que le tableau est rempli
         }
         
-        
+         
     }
     
-    
-    
-    
-    
 }
+    
+    
+    
+    
+    
+
 
 
 

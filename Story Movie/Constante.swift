@@ -16,6 +16,8 @@ var dataBase:[String:String] = ["Max.ravau@gmail.com" : "Maxmax"]
 
 var myPlaylist: [Movie] = []
 
+var currentMovie: [PFObject] = []
+
 
 
 // On a crée la fonction removeMoviePlaylist avec un paramètre INT
