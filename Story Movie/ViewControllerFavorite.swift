@@ -70,6 +70,8 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Prototype5", for: indexPath) as! CollectionViewCellFavorite
         
+        
+        cell.imageCoverFavorite.image = UIImage()
         let listObject: PFObject = listeFavorite[indexPath.row]
         
         
@@ -85,10 +87,15 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
                     
                     DispatchQueue.main.async {
                         cell.imageCoverFavorite.image = UIImage(data: imageData!)
+
+//                        let cell = self.myCollectionViewFavorite.cellForItem(at: indexPath) as! CollectionViewCellFavorite
+//                        
+//                        DispatchQueue.main.async {
+//                        
+//
+//                        }
                     }
-                    
                 }
-                
             })
         }
         
@@ -102,11 +109,17 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         super.viewWillAppear(animated)
         
         
-        refreshUser()
+       // refreshUser()
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         getFavorisList()
-        
-        
-        
+
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
