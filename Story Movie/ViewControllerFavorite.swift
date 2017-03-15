@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
+class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
     var selectedMovie: PFObject?
@@ -84,17 +84,8 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
                 if (error == nil) {
                     print("ex : \(imageData!)")
                     print("get user picture no error")
-                    
-                    DispatchQueue.main.async {
-                        cell.imageCoverFavorite.image = UIImage(data: imageData!)
-
-//                        let cell = self.myCollectionViewFavorite.cellForItem(at: indexPath) as! CollectionViewCellFavorite
-//                        
-//                        DispatchQueue.main.async {
-//                        
-//
-//                        }
-                    }
+                    cell.imageCoverFavorite.image = UIImage(data: imageData!)
+                
                 }
             })
         }
@@ -109,7 +100,7 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         super.viewWillAppear(animated)
         
         
-       // refreshUser()
+       refreshUser()
         
         
         
@@ -134,12 +125,15 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
             
             let nextScene = segue.destination as! TableViewControllerDF
             
-            nextScene.currentMovie1 = self.selectedMovie
+            nextScene.currentMovie = self.selectedMovie
             
         }
         
     }
     
+    
+    
+        
     func refreshUser(){
         
         let user = PFUser.current()
@@ -157,7 +151,7 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         self.listeFavorite.removeAll()
         let user : PFUser = PFUser.current()!
         print("2")
-        if let listeFavId = user["liste_favorite"] as? [String] {
+        if let listeFavId = user["favoriteMovieIdList"] as? [String] {
         
             
             

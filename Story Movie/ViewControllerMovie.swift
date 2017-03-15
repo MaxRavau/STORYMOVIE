@@ -77,6 +77,8 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
         
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Prototype3", for: indexPath) as! CollectionViewCellMovie
+        
+        cell.imageCover.image = UIImage()
         let categorieObject: PFObject = listeMovie[indexPath.row]
         
         

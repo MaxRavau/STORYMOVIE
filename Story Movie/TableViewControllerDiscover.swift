@@ -66,6 +66,7 @@ class TableViewControllerDiscover: UITableViewController {
         
         let usercell = tableView.dequeueReusableCell(withIdentifier: "Prototype2", for: indexPath) as! TableViewCellDiscover
         
+        usercell.imageCover.image = UIImage()
         let categorieObject: PFObject = categorieListe[indexPath.row]
         
         usercell.labelTitre.text = categorieObject["title"] as! String?

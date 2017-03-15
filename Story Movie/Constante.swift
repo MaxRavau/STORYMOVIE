@@ -16,27 +16,29 @@ var dataBase:[String:String] = ["Max.ravau@gmail.com" : "Maxmax"]
 
 var myPlaylist: [Movie] = []
 
-var currentMovie: [PFObject] = []
+var listeFavorite: [PFObject] = []
 
 
 
 // On a crée la fonction removeMoviePlaylist avec un paramètre INT
-func RemoveMoviePlaylist(identifiant:Int){
+func RemoveMoviePlaylist(movie: PFObject){
 // on crée une variable counter est on l'a déclare à 0
     var counter : Int = 0
+    var currentUser = PFUser.current()
+    
 // On fait notre boucle de notre liste
-    while counter < myPlaylist.count{
+    while counter <= (currentUser?["favoriteMovieIdList"] as AnyObject).count {
         
         print(" ex : \(counter)")
 // on crée une condition si l'identifiant du film de la liste et pareil que le l'identifiant du film
-        if myPlaylist[counter]._identifiant == identifiant{
+        if currentUser?.objectId == movie.objectId{
             
             print("\(counter)")
-            print("\(myPlaylist)")
+            print("\(currentUser)")
             
 // alors on supprime le counter selectionné.
           
-         myPlaylist.remove(at: counter)
+         currentUser?.remove(forKey: movie.objectId!)
             
         }
        counter += 1 
@@ -44,26 +46,29 @@ func RemoveMoviePlaylist(identifiant:Int){
     
 }
 
-func thisMovieIsInPlaylist(film: Movie) -> Bool{
+
+func checkListFavorite(movie: PFObject) -> Bool{
     
-    var counter : Int = 0
+    let currentUser = PFUser.current()
     
-    while counter < myPlaylist.count{
+
+      for movieId in currentUser?["favoriteMovieIdList"] as! [String] {
         
-        if myPlaylist[counter]._identifiant == film._identifiant{
+        if movieId == movie.objectId! {
             
             
-                return true
-        
+            
+            return true
+            
         }else{
         
-            
-        }
-        counter += 1
     }
-    return false
+    
 }
-
+    
+    return false
+    
+}
 
 
 

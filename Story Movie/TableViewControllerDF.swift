@@ -11,9 +11,9 @@ import Parse
 
 class TableViewControllerDF: UITableViewController {
     
-    var currentMovie1: PFObject?
+    var currentMovie: PFObject?
     
-    var currentMovie: Movie?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,25 +48,74 @@ class TableViewControllerDF: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Prototype7", for: indexPath) as! TableViewCellDF
         
-        cell.LabelTitre.text = currentMovie?._titre
-        cell.LabelAnnee.text = currentMovie?._annee
-        cell.ImageCover.image = currentMovie?._image
-        cell.Labelminutes.text = currentMovie?._duree
-        cell.LabelSousTitre.text = currentMovie?._sousTitre
+        let movieObject: PFObject = currentMovie!
+        
+        cell.LabelTitre.text = movieObject["title"] as! String?
+        cell.LabelSousTitre.text = movieObject["sousTitle"] as! String?
+        cell.Labelminutes.text = movieObject["duree"] as! String?
+        cell.LabelAnnee.text = movieObject["annee"] as! String?
+        cell.ImageCover.image = UIImage()
+        
+        if let userPicture = movieObject["image"] as? PFFile {
+            print("get user picture")
+            userPicture.getDataInBackground(block: { (imageData: Data?, error: Error?) -> Void in
+                print("get user picture response")
+                if (error == nil) {
+                    print("get user picture no error")
+                    cell.ImageCover.image = UIImage(data: imageData!)
+                    
+                }
+            })
+            
+        }
+
         
         return cell
     }
     
     @IBAction func buttonTapSup(_ sender: Any) {
         
-        RemoveMoviePlaylist(identifiant: (currentMovie?._identifiant)!)
-        print("Le film n'est plus dans myPlaylist")
+        currentMovie?.remove(currentMovie!.objectId!, forKey: "favoriteMovieIdList")
+        
+        currentMovie?.saveInBackground(block: { (Bool, Error) in
+            if Error == nil {
+                
+               print("le film est \(self.currentMovie) est bien supprimé des favoris")
+            }else{
+                
+                print("error")
+           }
+        })
         
         navigationController?.popToRootViewController(animated: true)
         
     }
     
-    
+    func getMovieDescription(){
+        
+        let query = PFQuery(className:"Movies")
+        query.cachePolicy = PFCachePolicy.cacheThenNetwork
+        query.findObjectsInBackground { (objects, error) in
+            if error == nil {
+                print("Successfully retrieved \(objects!.count) scores.")
+                //self.currentMovie = objects!
+                self.tableView.reloadData()
+                if let currentMovie = objects {
+                    for movie in currentMovie {
+                        let title = movie["title"]
+                        let sousTitle = movie["sousTitle"]
+                        let annee = movie["annee"]
+                        let duree = movie["duree"]
+                        
+                        print("\(title) \(sousTitle) \(annee) \(duree)")
+                        
+                    }
+                }
+            }
+            
+        }
+    }
+
     
     
     /*

@@ -89,26 +89,26 @@ class TableViewControllerDescription: UITableViewController {
             
         }
         
-        //let MovieInPlaylist = thisMovieIsInPlaylist(film: currentMovie!)
+        let MovieInPlaylist = checkListFavorite(movie: movieObject)
     
-        //if MovieInPlaylist == false{
-        // cell.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
+        if MovieInPlaylist == false{
+         cell.favoriteButton?.isHidden = false //cela permet a remettre le bouton quand le film n'est plus dans la liste
         //cell.favoriteButton?.setImage(#imageLiteral(resourceName: "Add to Favorites-100-2"), for: UIControlState.normal)
-        // print("le film n'est pas dans la liste")
+         print("le film n'est pas dans la liste")
         
-        // }else{
+         }else{
         
         
-        //self.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
+        cell.favoriteButton?.isHidden = true //c'est pour faire effacer le bouton quand le film est dans la liste
         //self.favoriteButton?.setImage(#imageLiteral(resourceName: "Cancel Filled2"), for: UIControlState.normal)
-        //print("le film est maintenant dans myPaylist")
+        print("le film est maintenant dans myPaylist")
         
         
         
         
         //On utilise cette petite fonction pour sortir le favoriteButton du tableaViewCell et pour l'utiliser dans toute la page
         
-        //}
+        }
         
         return cell
     }
@@ -118,7 +118,7 @@ class TableViewControllerDescription: UITableViewController {
         
         let query = PFQuery(className:"Movies")
         query.cachePolicy = PFCachePolicy.cacheThenNetwork
-        query.whereKey("liste_favorite", equalTo: "identifiant")
+        query.whereKey("favoriteMovieIdList", equalTo: "identifiant")
         query.findObjectsInBackground { (objects, error) in
             if error == nil {
                 print("Successfully retrieved \(objects!.count) scores.")
@@ -172,7 +172,7 @@ class TableViewControllerDescription: UITableViewController {
     func SaveMovieUser() {
         
         let currentUser = PFUser.current()
-        currentUser?.addUniqueObject(self.currentMovie!.objectId!, forKey: "liste_favorite")
+        currentUser?.addUniqueObject(self.currentMovie!.objectId!, forKey: "favoriteMovieIdList")
         currentUser?.saveInBackground(block: { (success, error) -> Void in
             if error != nil {
                 print("error")
@@ -182,38 +182,12 @@ class TableViewControllerDescription: UITableViewController {
         })
     }
     
-    func getListFavorite(){
-        //On crée la fonction getListFavorite()
-        let query = PFQuery(className:"User")
-        // On crée une variable query qui est egal a la classe User
-        query.cachePolicy = PFCachePolicy.cacheThenNetwork
-        
-        query.findObjectsInBackground { (objects, error) in
-            // dans la variable on recherche les objects et les erreurs
-            if error == nil {
-                //Si il ya pas d'erreur
-                print("Successfully retrieved \(objects!.count) scores.")
-                self.tableView.reloadData()
-                //Mettre le tableau a jour
-                if let listeFavorite = objects {
-                    //si la variable listefavorite = a object
-                    for favoris in listeFavorite {
-                        // pour favoris dans la listeFavorite
-                        let listeFavorite = favoris["liste_favorite"]
-                        //la variable liste_favorite est égal a favoris["liste_favorite"]
-                        print("\(listeFavorite)")
-                    }
-                }
-            }
             
-        }
-        
-        
-    }
-    
-    
-    
 }
+    
+    
+    
+
 
 
 
