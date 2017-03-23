@@ -91,28 +91,25 @@ class ViewControllerFavorite: UIViewController, UICollectionViewDelegate , UICol
         }
         
         return cell
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         //chaque fois que arrives sur cette page tu mets à jour le contenu de la page
+        myCollectionViewFavorite.reloadData()
         
         super.viewWillAppear(animated)
         
         
-       refreshUser()
-        
+        refreshUser()
+        getFavorisList()
         
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        getFavorisList()
-
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         self.selectedMovie = listeFavorite[indexPath.row]
         

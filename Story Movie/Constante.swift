@@ -20,32 +20,6 @@ var listeFavorite: [PFObject] = []
 
 
 
-// On a crée la fonction removeMoviePlaylist avec un paramètre INT
-func RemoveMoviePlaylist(movie: PFObject){
-// on crée une variable counter est on l'a déclare à 0
-    var counter : Int = 0
-    var currentUser = PFUser.current()
-    
-// On fait notre boucle de notre liste
-    while counter <= (currentUser?["favoriteMovieIdList"] as AnyObject).count {
-        
-        print(" ex : \(counter)")
-// on crée une condition si l'identifiant du film de la liste et pareil que le l'identifiant du film
-        if currentUser?.objectId == movie.objectId{
-            
-            print("\(counter)")
-            print("\(currentUser)")
-            
-// alors on supprime le counter selectionné.
-          
-         currentUser?.remove(forKey: movie.objectId!)
-            
-        }
-       counter += 1 
-    }
-    
-}
-
 
 func checkListFavorite(movie: PFObject) -> Bool{
     

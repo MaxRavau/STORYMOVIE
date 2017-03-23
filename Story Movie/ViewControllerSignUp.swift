@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 
+
 class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var adressEmail: UITextField!
@@ -114,6 +115,7 @@ class ViewControllerSingUp: UIViewController, UITextFieldDelegate, UIImagePicker
         profilPhotoImage.image = info[UIImagePickerControllerOriginalImage] as! UIImage?
         
         self.dismiss(animated: true, completion: nil)
+        
         
     }
     

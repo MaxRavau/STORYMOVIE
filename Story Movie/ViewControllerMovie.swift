@@ -113,7 +113,7 @@ class ViewControllerMovie: UIViewController  , UICollectionViewDelegate , UIColl
         // Si la segue s'appelle AG
         if (segue?.identifier == "AG"){
             // alors la prochaine page de destination c'est le tableViewControllerDescription
-            let nextScene = segue?.destination as! TableViewControllerDescription
+            let nextScene = segue?.destination as! TableViewControllerStaticDescription
             // la page d'après on récupère le détail du film de la listeMovie
             print("ADD2")
             

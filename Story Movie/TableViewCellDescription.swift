@@ -14,13 +14,7 @@ class TableViewCellDescription: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    @IBOutlet var labelTitre: UILabel!
-    @IBOutlet var labelMinute: UILabel!
-    @IBOutlet var labelAnnee: UILabel!
-    @IBOutlet var imageCover: UIImageView!
-    @IBOutlet var labelSousTitre: UITextView!
-    @IBOutlet var favoriteButton: UIButton!
-    
+       
     
        
     override func setSelected(_ selected: Bool, animated: Bool) {

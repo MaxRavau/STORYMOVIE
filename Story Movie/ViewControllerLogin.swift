@@ -10,7 +10,11 @@ import UIKit
 import Parse
 import LocalAuthentication
 
+
+
 class ViewControllerLogin: UIViewController, UITextFieldDelegate {
+    
+    
     
     @IBOutlet var buttonConnexion: UIButton!
     
@@ -25,8 +29,7 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
     
     
     
-    
-    
+
     @IBAction func connexionButtonTap(_ sender: Any) {
         
         startLoginRequest()
@@ -37,6 +40,8 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         initUI()
+        
+        
         
     }
     
@@ -63,6 +68,8 @@ class ViewControllerLogin: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    
     
     func configureButtons(){
         

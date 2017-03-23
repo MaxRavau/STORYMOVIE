@@ -10,6 +10,7 @@ import UIKit
 import Parse
 
 
+
 class TableViewControllerDiscover: UITableViewController {
     
     //var selectedCategorie: Categorie?
@@ -39,6 +40,7 @@ class TableViewControllerDiscover: UITableViewController {
         getCategorieListe()
     }
     
+   
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -54,6 +56,8 @@ class TableViewControllerDiscover: UITableViewController {
         
         // On veut que notre tableau fasse la taille de notre liste
     }
+    
+    
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,6 +92,7 @@ class TableViewControllerDiscover: UITableViewController {
         
     }
     
+       
     func getCategorieListe(){
         
         let query = PFQuery(className:"Categorie")

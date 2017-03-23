@@ -75,18 +75,18 @@ class TableViewControllerDF: UITableViewController {
     
     @IBAction func buttonTapSup(_ sender: Any) {
         
-        currentMovie?.remove(currentMovie!.objectId!, forKey: "favoriteMovieIdList")
-        
-        currentMovie?.saveInBackground(block: { (Bool, Error) in
-            if Error == nil {
-                
-               print("le film est \(self.currentMovie) est bien supprimé des favoris")
-            }else{
-                
+        let currentUser = PFUser.current()
+        currentUser?.remove(self.currentMovie!.objectId!, forKey: "favoriteMovieIdList")
+        currentUser?.saveInBackground(block: { (success, error) -> Void in
+            if error != nil {
                 print("error")
-           }
+            } else {
+                print("le \(self.currentMovie) est bien supprimer de la liste")
+            }
         })
-        
+    
+
+    
         navigationController?.popToRootViewController(animated: true)
         
     }
@@ -114,6 +114,7 @@ class TableViewControllerDF: UITableViewController {
             }
             
         }
+        
     }
 
     
