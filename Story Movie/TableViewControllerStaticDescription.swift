@@ -44,7 +44,7 @@ class TableViewControllerStaticDescription: UITableViewController {
         getImageCover()
         getMovieDescription()
         configurationButton()
-        buttonFavoriteHidden()
+        
         
     }
     
@@ -56,6 +56,14 @@ class TableViewControllerStaticDescription: UITableViewController {
 
     
     
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        buttonFavoriteHidden()
+        
     }
     
     
@@ -179,8 +187,7 @@ class TableViewControllerStaticDescription: UITableViewController {
     @IBAction func ButtonTapAddToFavorite(_ sender: Any) {
     
         SaveMovieUser()
-        
-        navigationController?.popToRootViewController(animated: true)
+        print("fin de la fonction")
     
     }
     
@@ -193,6 +200,8 @@ class TableViewControllerStaticDescription: UITableViewController {
             if error != nil {
                 print("error")
             } else {
+                self.buttonFavoriteHidden()
+                self.myTableViewDescription.reloadData()
                 print("le \(self.currentMovie) est bien dans la liste des favoris")
             }
         })
